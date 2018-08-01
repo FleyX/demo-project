@@ -1,0 +1,46 @@
+mybatis:
+  #对应实体类路径
+  type-aliases-package: com.example.mybatistest.entity
+  #对应mapper映射文件路径
+#  mapper-locations: classpath:mapper/*.xml
+
+#pagehelper配置
+pagehelper:
+  helper-dialect: mysql
+  reasonable: true
+  support-methods-arguments: true
+  params: count=countSql
+  returnPageInfo: check
+
+server:
+  port: 8081
+
+spring:
+  datasource:
+    name: mysqlTest
+    type: com.alibaba.druid.pool.DruidDataSource
+    #druid相关配置
+    druid:
+      #监控拦截统计的filters
+      filters: stat
+      driver-class-name: com.mysql.jdbc.Driver
+      url: jdbc:mysql://localhost:3306/test?useUnicode=true&characterEncoding=utf-8&useSSL=true
+      username: root
+      password: 123456
+      #配置初始化大小，最小，最大
+      initial-size: 1
+      min-idle: 1
+      max-active: 20
+      #获取连接等待超时时间
+      max-wait: 6000
+      #间隔多久检测一次需要关闭的空闲连接
+      time-between-eviction-runs-millis: 60000
+      #一个连接在池中的最小生存时间
+      min-evictable-idle-time-millis: 300000
+      #打开PSCache，并指定每个连接上PSCache的大小。oracle设置为true，mysql设置为false。分库分表设置较多推荐设置
+      pool-prepared-statements: false
+      max-pool-prepared-statement-per-connection-size: 20
+  http:
+    encoding:
+      charset: utf-8
+      enabled: true
