@@ -1,0 +1,85 @@
+<html>
+
+<head>
+    <title>原生js获取目录</title>
+    <meta charset="utf-8">
+</head>
+
+<body>
+    <style>
+        #sum {
+            position: fixed;
+            right: 10px;
+            top: 10px;
+        }
+    </style>
+    <div id="sum"></div>
+    <div id="cnblogs_post_body" style="margin-top:1000px;margin-bottom: 1000px">
+        <h1>标题1</h1>
+        <h2>标题1.1</h2>
+        <h1>表题2</h1>
+        <h3>标题2.1</h3>
+        <h4>标题2.1.1</h4>
+    </div>
+
+    <script>
+
+        createContents("cnblogs_post_body");
+
+        function createContents(id) {
+            let sum = [];
+            var ele = document.getElementById("cnblogs_post_body");
+            console.log(ele.attributes);
+            for (let i = 0; i < ele.children.length; i++) {
+                let item = ele.children[i];
+                if (item.tagName.length == 2 && item.tagName.startsWith("H")) {
+                    item.setAttribute("id", item.innerText);
+                    let temp = {
+                        level: item.tagName.substring(1),
+                        content: item.innerText,
+                        children: []
+                    }
+                    insertTo(sum, temp);
+                }
+            }
+            let str = printSum(sum,0);
+            console.log(str);
+            var a = document.createElement("div");
+            a.style="position:fixed;right:10px;top:10px";
+            a.innerHTML=str;
+            document.getElementById("sum").appendChild(a);
+
+        }
+
+        function insertTo(sum, temp) {
+            if (sum.length == 0) {
+                sum.push(temp);
+                return;
+            }
+            if (sum[0].level == temp.level) {
+                sum.push(temp);
+            } else {
+                insertTo(sum[sum.length - 1].children, temp);
+            }
+        }
+
+
+        function printSum(sum,count) {
+            let str = '';
+            if (sum.length == 0)
+                return str;
+            count++;
+            for(let i=0;i<sum.length;i++){
+                for(let j=0;j<count;j++){
+                    str += "&emsp;";
+                }
+                str += `<a href="#${sum[i].content}">${sum[i].content}</a><br/>`;
+                str+=printSum(sum[i].children,count);
+                count = 0;
+            }
+            return str;
+        }
+    </script>
+</body>
+
+</html>
