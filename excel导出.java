@@ -35,10 +35,6 @@ public class ExcelUtil {
      * 每个sheet的表头，String为sheet名，String[][] 为表头项与表头项对应到object的属性名,例如：["id","对象id"]
      */
     private LinkedHashMap<String, String[][]> headers;
-    /**
-     * 使用该类的一些通用函数
-     */
-    ExportExcelUtil exportExcelUtil;
 
     public ExcelUtil(String fileName, HashMap<String, List<?>> data, LinkedHashMap<String, String[][]> headers) {
         this.fileName = fileName;
