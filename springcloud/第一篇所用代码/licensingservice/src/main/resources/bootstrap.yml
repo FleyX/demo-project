@@ -1,0 +1,13 @@
+spring:
+  application:
+    #指定名称，以便spring cloud config客户端知道查找哪个配置
+    name: licensingservice
+  profiles:
+    #指定环境
+    active: dev
+  cloud:
+    config:
+      enabled: true
+      #指定config server地址
+      uri: http://localhost:8888
+

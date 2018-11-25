@@ -1,0 +1,29 @@
+server:
+  port: 8888
+
+eureka:
+  instance:
+    #注册服务的IP，而不是服务器名
+    prefer-ip-address: true
+  client:
+    #向eureka注册服务
+    register-with-eureka: true
+    #拉取注册表的本地副本
+    fetch-registry: true
+    service-url:
+      #Eureka服务的位置(如果有多个注册中心，使用,分隔）
+      defaultZone: http://localhost:8761/eureka/
+
+spring:
+  profiles:
+  # 使用文件系统来存储配置信息，需要设置为native
+    active: native
+  application:
+    name: confsvr
+  cloud:
+    config:
+      server:
+        native:
+        # 使用文件来存放配置文件,为每个应用程序提供用逗号分隔的文件夹列表
+          searchLocations: file:///D:/configFolder/licensingservice,file:///D:/configFolder/organizationservice
+
