@@ -1,0 +1,25 @@
+server:
+  port: 8888
+
+spring:
+  profiles:
+  # 使用文件系统来存储配置信息，需要设置为native,git设置为git
+    active: git
+  application:
+    name: test
+  cloud:
+    config:
+      server:
+        native:
+        # 使用文件来存放配置文件,为每个应用程序提供用逗号分隔的文件夹列表
+          searchLocations: file:///D:/configFolder/licensingservice
+        git:
+          uri: https://github.com/FleyX/demo-project
+          # 查找配置文件路径（,分隔）
+          search-paths: springcloud/config/licensingservice
+          #如果为公开仓库，用户名密码可不填写
+          username:
+          password:
+      #配置git仓库的分支
+      label: master
+
