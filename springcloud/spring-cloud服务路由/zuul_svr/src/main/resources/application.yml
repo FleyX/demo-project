@@ -1,0 +1,38 @@
+spring:
+  application:
+    name: zuulservice
+#服务发现配置
+eureka:
+  instance:
+    prefer-ip-address: true
+  client:
+    register-with-eureka: true
+    fetch-registry: true
+    service-url:
+      defaultZone: http://localhost:8761/eureka/
+server:
+  port: 5555
+
+#zuul配置
+zuul:
+  routes:
+    #用于内部识别关键字
+    licensestatic:
+      path: /licensestatic/**
+      serviceId: licensestatic
+    organizationservice: /org/**
+  # 使用","分隔，“*”表示全部忽略
+  ignored-services: 'organizationservice'
+  prefix: /apis
+
+
+ribbon:
+  readTimeOut: 7000
+  eureka:
+    #禁用Eureka支持
+    enabled: false
+
+licensestatic:
+  ribbon:
+    #licensestatic服务将会路由到下列地址
+    listOfServers: http://localhost:10011,http://localhost:10012

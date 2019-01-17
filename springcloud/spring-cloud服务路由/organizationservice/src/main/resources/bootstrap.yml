@@ -1,0 +1,18 @@
+spring:
+  application:
+    #指定名称，以便spring cloud config客户端知道查找哪个配置
+    name: organizationservice
+  profiles:
+    #指定环境
+    active: dev
+  cloud:
+    config:
+      enabled: true
+eureka:
+  instance:
+    prefer-ip-address: true
+  client:
+    register-with-eureka: true
+    fetch-registry: true
+    service-url:
+      defaultZone: http://localhost:8761/eureka/
