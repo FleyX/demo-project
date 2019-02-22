@@ -1,0 +1,43 @@
+spring:
+  application:
+    #指定名称，以便spring cloud config客户端知道查找哪个配置
+    name: licensingservice
+  profiles:
+    #指定环境
+    active: dev
+  redis:
+    database: 0
+    host: 192.168.226.5
+    port: 6379
+    password:
+    timeout: 3000
+    pool:
+      max-active: 10
+      max-wait: -1
+      max-idle: 10
+      min-idle: 0
+  cloud:
+    config:
+      enabled: true
+    stream:
+      bindings:
+        input:
+          destination: orgChangeTopic
+          content-type: application/json
+          # 定义将要消费消息的消费者组的名称
+          # 可能多个服务监听同一个消息队列。如果定义了消费者组，那么同组中只要有一个消费了消息，剩余的不会再次消费该消息，保证只有消息的
+          # 一个副本会被该组的某个实例所消费
+          group: licensingGroup
+      kafka:
+        binder:
+          zk-nodes: 192.168.226.5:2181
+          brokers: 192.168.226.5:9092
+eureka:
+  instance:
+    prefer-ip-address: true
+  client:
+    register-with-eureka: true
+    fetch-registry: true
+    service-url:
+      defaultZone: http://localhost:8761/eureka/
+

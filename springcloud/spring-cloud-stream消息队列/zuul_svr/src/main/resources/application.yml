@@ -1,0 +1,30 @@
+spring:
+  application:
+    name: zuulservice
+#服务发现配置
+eureka:
+  instance:
+    prefer-ip-address: true
+  client:
+    register-with-eureka: true
+    fetch-registry: true
+    service-url:
+      defaultZone: http://localhost:8761/eureka/
+server:
+  port: 5555
+
+#zuul配置，自定义服务路径
+zuul:
+  routes:
+    #用于内部识别关键字
+    organizationservice: /org/**
+  # 使用","分隔，“*”表示全部忽略
+  ignored-services: organizationservice
+  prefix: /apis
+
+
+ribbon:
+  readTimeOut: false
+  eureka:
+    #禁用Eureka支持
+    enabled: true

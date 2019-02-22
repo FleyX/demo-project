@@ -1,0 +1,27 @@
+spring:
+  application:
+    #指定名称，以便spring cloud config客户端知道查找哪个配置
+    name: organizationservice
+  profiles:
+    #指定环境
+    active: dev
+  cloud:
+    config:
+      enabled: true
+    stream:
+      bindings:
+        output:
+          destination: orgChangeTopic
+          content-type: application/json
+      kafka:
+        binder:
+          zk-nodes: 192.168.226.5:2181
+          brokers: 192.168.226.5:9092
+eureka:
+  instance:
+    prefer-ip-address: true
+  client:
+    register-with-eureka: true
+    fetch-registry: true
+    service-url:
+      defaultZone: http://localhost:8761/eureka/
