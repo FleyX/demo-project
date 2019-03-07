@@ -1,0 +1,14 @@
+server:
+  port: 8081
+  servlet:
+    context-path: /sso
+spring:
+  application:
+    name: SSO
+  datasource:
+    type: com.alibaba.druid.pool.DruidDataSource
+    druid:
+      driver-class-name: com.mysql.cj.jdbc.Driver
+      url: jdbc:mysql://localhost:3308/itoss?useUnicode=true&characterEncoding=gbk&serverTimezone=UTC&useSSL=false
+      username: root
+      password: root

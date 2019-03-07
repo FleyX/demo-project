@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>登录成功回调地址</title>
+</head>
+<body>
+<script src="https://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script>
+<script src="/static/main.js"></script>
+<script src="https://cdn.bootcss.com/Base64/1.0.2/base64.min.js"></script>
+<script>
+    var token = getUrlParam("token");
+    setToken(token);
+    // alert("认证成功，准备跳回登录登录前访问地址");
+    window.location.href = getUrlParam("redirect");
+</script>
+</body>
+</html>

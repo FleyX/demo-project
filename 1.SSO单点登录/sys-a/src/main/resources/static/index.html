@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>系统A</title>
+</head>
+<body>
+<div style="align-content: center">这里是系统A主页面</div>
+<div style="align-content: center">当前登录用户：<span id="loginStatus"></span></div>
+<div>
+    <button onclick="test()">测试接口访问</button>
+    <button onclick="clearToken()">注销登录</button>
+</div>
+<script src="https://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script>
+<script src="/static/main.js"></script>
+<script src="https://cdn.bootcss.com/Base64/1.0.2/base64.min.js"></script>
+<script>
+    $('#loginStatus').text(getUserName());
+    if (getToken() == null) {
+        goToLoginServer();
+    }
+
+    test();
+
+    function test() {
+        $.get("/test?token=" + getToken(), function (res) {
+            if (res.code === 1) {
+            } else {
+                goToLoginServer();
+            }
+        })
+    }
+
+    //注销登录
+    function clearToken() {
+        $.get("/logout?token=" + getToken(), function (res) {
+            goToLoginServer();
+        })
+    }
+
+    function goToLoginServer() {
+        alert("当前无登录信息，跳转到认证中心");
+        location.href = encodeURI("http://localhost:8080?order=checkLogin&redirect=" + window.location.origin
+            + "/static/redirect.html?redirect=" + window.location.href);
+    }
+
+</script>
+</body>
+</html>

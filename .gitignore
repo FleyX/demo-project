@@ -47,3 +47,6 @@ hs_err_pid*
 /nbdist/
 /.nb-gradle/
 target
+.mvn
+mvnw
+mvnw.cmd
