@@ -9,7 +9,7 @@ spring:
     type: redis
   redis:
     database: 0
-    host: 10.82.27.177
+    host: 192.168.226.5
     port: 6379
     password:
     # 连接超时时间（ms)

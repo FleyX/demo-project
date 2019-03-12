@@ -22,21 +22,20 @@ public class JwtUtil {
     /**
      * Description: 生成一个jwt字符串
      *
-     * @param recId   用户id
-     * @param loginId 登录id
+     * @param name    用户名
      * @param secret  秘钥
      * @param timeOut 超时时间（单位s）
      * @return java.lang.String
      * @author fanxb
      * @date 2019/3/4 17:26
      */
-    public static String encode(String loginId, String secret, long timeOut) {
+    public static String encode(String name, String secret, long timeOut) {
         Algorithm algorithm = Algorithm.HMAC256(secret);
         String token = JWT.create()
                 //设置过期时间为一个小时
                 .withExpiresAt(new Date(System.currentTimeMillis() + timeOut * 1000))
                 //设置负载
-                .withClaim("loginId", loginId)
+                .withClaim("name", name)
                 .sign(algorithm);
         return token;
     }
@@ -46,7 +45,7 @@ public class JwtUtil {
      *
      * @param token  token
      * @param secret secret
-     * @return java.util.Map<java.lang.String                                                               ,                                                               com.auth0.jwt.interfaces.Claim>
+     * @return java.util.Map<java.lang.String                                                                                                                                                                                                                                                               ,                                                                                                                                                                                                                                                               com.auth0.jwt.interfaces.Claim>
      * @author fanxb
      * @date 2019/3/4 18:14
      */
