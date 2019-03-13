@@ -6,6 +6,9 @@ import com.example.sysa.entity.ReturnEntity;
 import com.example.sysa.entity.UserContext;
 import com.example.sysa.util.HttpClient;
 import com.example.sysa.util.UserContextHolder;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 import org.springframework.util.Base64Utils;
 
@@ -29,11 +32,10 @@ import java.util.concurrent.ConcurrentHashMap;
 @WebFilter(urlPatterns = "/**", filterName = "loginFilter")
 public class LoginFilter implements Filter {
 
-    public static final Map<String, Long> tokenMap = new ConcurrentHashMap<>();
-    /**
-     * 10s内认为报错在tokenMap中的token有效，避免频繁请求认证中心验证token有效性
-     */
-    private static final int EXPIRE_TIME = 10 * 1000;
+    private Logger logger = LoggerFactory.getLogger(this.getClass());
+
+    @Value("${sso_server}")
+    private String serverHost;
 
     @Override
     public void init(FilterConfig filterConfig) throws ServletException {
@@ -53,26 +55,8 @@ public class LoginFilter implements Filter {
             filterChain.doFilter(servletRequest, servletResponse);
             return;
         }
-        boolean isOk = false;
-        String token = "";
-        try {
-            //如果token未缓存或距离上次检查有效性超过1分钟，向认证中心请求检查有效性
-            token = httpServletRequest.getParameter("token");
-            Long lastCheckTime = tokenMap.get(token);
-            if (lastCheckTime == null || System.currentTimeMillis() - lastCheckTime > EXPIRE_TIME) {
-                JSONObject object = HttpClient.get("http://localhost:8080/checkToken?token=" + token);
-                if (object.getInteger("code") == 1) {
-                    isOk = true;
-                    tokenMap.put(token, System.currentTimeMillis());
-                }
-            } else {
-                //token有效，且未过期
-                isOk = true;
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        if (isOk) {
+        String token = httpServletRequest.getParameter("token");
+        if (this.check(token)) {
             //token和用户id保存到userContextholder
             String str = new String(Base64Utils.decodeFromString(token.split("\\.")[1]));
             UserContext context = new UserContext(JSON.parseObject(str).getString("name"), token);
@@ -83,6 +67,19 @@ public class LoginFilter implements Filter {
             response.setContentType("application/json;charset=utf-8");
             response.setCharacterEncoding("utf-8");
             response.getWriter().write(JSON.toJSONString(new ReturnEntity(-1, "未登录", null)));
+        }
+    }
+
+    private boolean check(String jwt) {
+        try {
+            if (jwt == null || jwt.trim().length() == 0) {
+                return false;
+            }
+            JSONObject object = HttpClient.get(serverHost + "/checkJwt?token=" + jwt);
+            return object.getInteger("code") == 1;
+        } catch (Exception e) {
+            logger.error("向认证中心请求失败", e);
+            return false;
         }
 
     }

@@ -5,6 +5,7 @@ import com.example.sysa.entity.UserContext;
 import com.example.sysa.filter.LoginFilter;
 import com.example.sysa.util.HttpClient;
 import com.example.sysa.util.UserContextHolder;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -18,16 +19,19 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class Main {
 
+    @Value("${sso_server}")
+    private String serverHost;
+
     @RequestMapping("/test")
     public ReturnEntity test() {
         return new ReturnEntity(1, "通过验证", null);
     }
 
+
     @RequestMapping("/logout")
-    public ReturnEntity logout() throws Exception{
+    public ReturnEntity logout() throws Exception {
         UserContext context = UserContextHolder.get();
-        HttpClient.get("http://localhost:8080/clearToken?token="+context.getToken());
-        LoginFilter.tokenMap.remove(context.getToken());
+        HttpClient.get(serverHost + "/clearToken?token=" + context.getToken());
         return null;
     }
 }

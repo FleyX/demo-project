@@ -44,4 +44,12 @@ public class ReturnEntity {
     public void setData(Object data) {
         this.data = data;
     }
+
+    public static ReturnEntity successResult(Object data) {
+        return new ReturnEntity(1, "", data);
+    }
+
+    public static ReturnEntity failedResult(String message) {
+        return new ReturnEntity(0, message, null);
+    }
 }

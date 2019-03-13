@@ -5,58 +5,40 @@
     <title>认证中心</title>
 </head>
 <div style="text-align: center;">这里是认证中心主页</div>
-<div>
-    <button onclick="clearToken()">清除token</button>
-</div>
 <script src="https://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script>
 <script src="main.js"></script>
 <script src="https://cdn.bootcss.com/Base64/1.0.2/base64.js"></script>
 <script>
-    $('#loginStatus').html(getUserName())
-
-    function clearToken() {
-        delete window.localStorage.token;
-    }
-
     var order = getUrlParam("order");
     switch (order) {
         case "checkLogin":
             checkLogin();
-            break;
-        case "updateToken":
-            updateToken();
             break;
         default:
             console.log("不支持的order:" + order);
     }
 
     function checkLogin() {
-        var token = getToken();
-        if (token == null) {
+        var token = localStorage.getItem("token");
+        if (token == null || token.length == 0) {
             goLogin();
         } else {
             //有token，检查token是否还有效
-            $.get("/checkToken?token=" + getToken(), function (res) {
+            $.get("/sso/checkJwt?token=" + localStorage.getItem("token"), function (res) {
                 if (res.code === 1) {
-                    alert('以登录，跳转到回调页面');
+                    alert('已登录，跳转到回调页面');
                     window.location.href = getUrlParam("redirect") + "&token=" + getToken();
-                }else {
+                } else {
                     goLogin();
                 }
             })
         }
     }
 
-    function goLogin(){
-        // alert("无认证信息，即将跳转到登录页面");
-        window.location.href = encodeURI("/login.html?redirect=" + getUrlParam("redirect"));
+    function goLogin() {
+        alert("无认证信息，即将跳转到登录页面");
+        window.location.href = encodeURI("./login.html?redirect=" + getUrlParam("redirect"));
     }
-
-    function updateToken() {
-        var token = getUrlParam("token");
-        setToken(token);
-    }
-
 
 </script>
 </body>

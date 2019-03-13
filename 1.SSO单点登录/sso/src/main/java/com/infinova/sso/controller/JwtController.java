@@ -35,15 +35,8 @@ public class JwtController {
     }
 
     @PostMapping("/checkJwt")
-    public ReturnEntity checkJwt(@RequestBody JSONArray tokenList) {
-        return ReturnEntity.successResult(service.checkJwt(tokenList));
-    }
-
-    @GetMapping("/refreshJwt")
-    public ReturnEntity refreshJwt() {
-        String oldToken = HttpUtil.getData(JwtService.JWT_KEY);
-        String newToken = service.refreshJwt(oldToken);
-        return ReturnEntity.successResult(newToken);
+    public ReturnEntity checkJwt(String token) {
+        return ReturnEntity.successResult(service.checkJwt(token));
     }
 
     @GetMapping("/inValid")

@@ -11,26 +11,23 @@
     <button id="login" onclick="doLogin()">登录</button>
 </div>
 
-<script src="https://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script>
 <script src="main.js"></script>
-<script src="https://cdn.bootcss.com/Base64/1.0.2/base64.min.js"></script>
+<script src="https://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script>
 <script>
     function doLogin() {
         var name = $('#name').val();
         var password = $('#password').val();
-        password = window.btoa(password);
-        console.log(name, password);
         $.ajax({
             type: 'post',
             url: "/sso/login",
             contentType: "application/json",
             dataType: 'json',
-            data: JSON.stringify({loginId: name, password: password}),
+            data: JSON.stringify({name: name, password: password}),
             success: function (res) {
                 if (res.code === 1) {
                     setToken(res.data);
-                    // alert("登录成功，跳转到回调地址");
-                    // window.location.href = getUrlParam("redirect") + "&token=" + res.data;
+                    alert("登录成功，跳转到回调地址");
+                    window.location.href = getUrlParam("redirect") + "&token=" + res.data;
                 } else {
                     alert("账号密码错误");
                 }

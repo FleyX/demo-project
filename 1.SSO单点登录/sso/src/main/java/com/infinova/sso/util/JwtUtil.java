@@ -33,7 +33,7 @@ public class JwtUtil {
         Algorithm algorithm = Algorithm.HMAC256(secret);
         String token = JWT.create()
                 //设置过期时间为一个小时
-                .withExpiresAt(new Date(System.currentTimeMillis() + timeOut * 1000))
+                .withExpiresAt(new Date(System.currentTimeMillis() + timeOut))
                 //设置负载
                 .withClaim("name", name)
                 .sign(algorithm);
@@ -45,7 +45,7 @@ public class JwtUtil {
      *
      * @param token  token
      * @param secret secret
-     * @return java.util.Map<java.lang.String                                                                                                                                                                                                                                                               ,                                                                                                                                                                                                                                                               com.auth0.jwt.interfaces.Claim>
+     * @return java.util.Map<java.lang.String                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               ,                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               com.auth0.jwt.interfaces.Claim>
      * @author fanxb
      * @date 2019/3/4 18:14
      */

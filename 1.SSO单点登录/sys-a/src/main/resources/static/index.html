@@ -5,25 +5,30 @@
     <title>系统A</title>
 </head>
 <body>
-<div style="align-content: center">这里是系统A主页面</div>
+<div id="currentHost"></div>
 <div style="align-content: center">当前登录用户：<span id="loginStatus"></span></div>
 <div>
     <button onclick="test()">测试接口访问</button>
     <button onclick="clearToken()">注销登录</button>
 </div>
 <script src="https://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script>
-<script src="/static/main.js"></script>
 <script src="https://cdn.bootcss.com/Base64/1.0.2/base64.min.js"></script>
 <script>
-    $('#loginStatus').text(getUserName());
-    if (getToken() == null) {
-        goToLoginServer();
+    $('#currentHost').text(location.origin);
+    var token = getUrlParam("token");
+    if (token != null && token.trim().length > 0) {
+        localStorage.setItem("token", token);
     }
-
     test();
 
+    var info = localStorage.getItem("token").split(".")[1];
+    var userName = JSON.parse(window.atob(info)).name;
+    $('#loginStatus').text(userName);
+
+
+    //测试token是否有效
     function test() {
-        $.get("/test?token=" + getToken(), function (res) {
+        $.get("/test?token=" + localStorage.getItem("token"), function (res) {
             if (res.code === 1) {
             } else {
                 goToLoginServer();
@@ -34,14 +39,21 @@
     //注销登录
     function clearToken() {
         $.get("/logout?token=" + getToken(), function (res) {
+            localStorage.removeItem("token");
             goToLoginServer();
         })
     }
 
     function goToLoginServer() {
         alert("当前无登录信息，跳转到认证中心");
-        location.href = encodeURI("http://localhost:8080?order=checkLogin&redirect=" + window.location.origin
-            + "/static/redirect.html?redirect=" + window.location.href);
+        location.href = encodeURI("http://localhost:8080/sso/static/index.html?order=checkLogin&redirect=" + window.location.href);
+    }
+
+    function getUrlParam(name) {
+        var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)"); //构造一个含有目标参数的正则表达式对象
+        var r = window.location.search.substr(1).match(reg);  //匹配目标参数
+        if (r != null) return unescape(r[2]);
+        return null; //返回参数值
     }
 
 </script>

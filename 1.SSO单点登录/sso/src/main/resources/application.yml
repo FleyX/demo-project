@@ -1,5 +1,5 @@
 server:
-  port: 8081
+  port: 8080
   servlet:
     context-path: /sso
 spring:
@@ -9,7 +9,7 @@ spring:
     type: redis
   redis:
     database: 0
-    host: 10.82.27.177
+    host: 192.168.1.100
     port: 6379
     password:
     # 连接超时时间（ms)
@@ -25,4 +25,8 @@ spring:
         max-idle: 8
         # 最小空闲链接数
         min-idle: 0
+  mvc:
+    static-path-pattern: /static/**
+# jwt过期时间，单位分钟
+jwt_expire_time: 60
 

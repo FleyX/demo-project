@@ -1,0 +1,6 @@
+server:
+  port: 8081
+spring:
+  mvc:
+    static-path-pattern: /static/**
+sso_server: http://localhost:8080/sso
