@@ -9,7 +9,7 @@
 
 - **5. mybatis-test : springboot 2.x 整合使用mybatis教程(xml和注解两种方式)** , [点击跳转](https://github.com/FleyX/demo-project/tree/master/mybatis-test)
 
-- **6. springboot_springsecurity_demo : sping boot 2.下整合使用springsecurity demo**，点击跳转
+- **6. springboot_springsecurity_demo : sping boot 2.下整合使用springsecurity demo**，[点击跳转](https://github.com/FleyX/demo-project/tree/master/springboot_spirngsecurity_demo)
 
 - **7. springcloud: spring cloud学习过程中的demo项目**,[点击跳转](https://github.com/FleyX/demo-project/tree/master/springcloud)<br/>注意其中licensingservice为配置中心git集中配置的样例配置。configFolder为配置中心磁盘文件集中式配置的样例。
 
