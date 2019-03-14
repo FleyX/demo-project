@@ -25,9 +25,10 @@
         } else {
             //有token，检查token是否还有效
             $.get("/sso/checkJwt?token=" + localStorage.getItem("token"), function (res) {
-                if (res.code === 1) {
+                console.log(res);
+                if (res.data === true) {
                     alert('已登录，跳转到回调页面');
-                    window.location.href = getUrlParam("redirect") + "&token=" + getToken();
+                    window.location.href = getUrlParam("redirect") + "?token=" + localStorage.getItem("token");
                 } else {
                     goLogin();
                 }

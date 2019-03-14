@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>系统A</title>
+    <title>系统</title>
 </head>
 <body>
 <div id="currentHost"></div>
@@ -14,16 +14,12 @@
 <script src="https://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script>
 <script src="https://cdn.bootcss.com/Base64/1.0.2/base64.min.js"></script>
 <script>
-    $('#currentHost').text(location.origin);
-    var token = getUrlParam("token");
-    if (token != null && token.trim().length > 0) {
-        localStorage.setItem("token", token);
-    }
     test();
 
     var info = localStorage.getItem("token").split(".")[1];
     var userName = JSON.parse(window.atob(info)).name;
     $('#loginStatus').text(userName);
+    $('#currentHost').text("当前ip，端口：" + location.origin);
 
 
     //测试token是否有效
@@ -38,7 +34,7 @@
 
     //注销登录
     function clearToken() {
-        $.get("/logout?token=" + getToken(), function (res) {
+        $.get("/logout?token=" + localStorage.getItem("token"), function (res) {
             localStorage.removeItem("token");
             goToLoginServer();
         })
@@ -46,14 +42,8 @@
 
     function goToLoginServer() {
         alert("当前无登录信息，跳转到认证中心");
-        location.href = encodeURI("http://localhost:8080/sso/static/index.html?order=checkLogin&redirect=" + window.location.href);
-    }
-
-    function getUrlParam(name) {
-        var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)"); //构造一个含有目标参数的正则表达式对象
-        var r = window.location.search.substr(1).match(reg);  //匹配目标参数
-        if (r != null) return unescape(r[2]);
-        return null; //返回参数值
+        localStorage.setItem("redirect", location.href);
+        location.href = encodeURI("http://localhost:8080/sso/static/index.html?order=checkLogin&redirect=" + window.location.origin + "/static/redirect.html");
     }
 
 </script>

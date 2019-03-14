@@ -2,7 +2,6 @@ package com.example.sysa.controller;
 
 import com.example.sysa.entity.ReturnEntity;
 import com.example.sysa.entity.UserContext;
-import com.example.sysa.filter.LoginFilter;
 import com.example.sysa.util.HttpClient;
 import com.example.sysa.util.UserContextHolder;
 import org.springframework.beans.factory.annotation.Value;
@@ -31,7 +30,7 @@ public class Main {
     @RequestMapping("/logout")
     public ReturnEntity logout() throws Exception {
         UserContext context = UserContextHolder.get();
-        HttpClient.get(serverHost + "/clearToken?token=" + context.getToken());
+        HttpClient.get(serverHost + "/inValid?token=" + context.getToken());
         return null;
     }
 }

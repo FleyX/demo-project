@@ -1,8 +1,7 @@
 package com.infinova.sso.util;
 
-import com.alibaba.fastjson.JSON;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.redis.core.RedisTemplate;
+import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.stereotype.Component;
 
 import java.util.concurrent.TimeUnit;
@@ -18,12 +17,15 @@ import java.util.concurrent.TimeUnit;
 public class RedisUtil {
     private static final int DEFAULT_EXPIRE_TIME = 60 * 1000;
 
-    public static RedisTemplate<String, String> redisTemplate;
+    public static StringRedisTemplate redisTemplate;
 
     @Autowired
-    public void setRedisTemplate(RedisTemplate<String, String> redisTemplate) {
+    public void setRedisTemplate(StringRedisTemplate redisTemplate) {
         RedisUtil.redisTemplate = redisTemplate;
     }
+
+    @Autowired
+
 
     /**
      * 设置键值对，使用默认过期时间
@@ -31,7 +33,7 @@ public class RedisUtil {
      * @param key   键
      * @param value 值
      */
-    public static void set(String key, Object value) {
+    public static void set(String key, String value) {
         set(key, value, DEFAULT_EXPIRE_TIME);
     }
 
@@ -42,8 +44,8 @@ public class RedisUtil {
      * @param value      value
      * @param expireTime 过期时间
      */
-    public static void set(String key, Object value, long expireTime) {
-        redisTemplate.opsForValue().set(key, JSON.toJSONString(value));
+    public static void set(String key, String value, long expireTime) {
+        redisTemplate.opsForValue().set(key, value);
         redisTemplate.expire(key, expireTime, TimeUnit.MILLISECONDS);
     }
 

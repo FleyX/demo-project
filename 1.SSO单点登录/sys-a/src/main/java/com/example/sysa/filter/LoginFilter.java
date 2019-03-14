@@ -17,8 +17,6 @@ import javax.servlet.annotation.WebFilter;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.util.Map;
-import java.util.concurrent.ConcurrentHashMap;
 
 
 /**
@@ -76,7 +74,7 @@ public class LoginFilter implements Filter {
                 return false;
             }
             JSONObject object = HttpClient.get(serverHost + "/checkJwt?token=" + jwt);
-            return object.getInteger("code") == 1;
+            return object.getBoolean("data");
         } catch (Exception e) {
             logger.error("向认证中心请求失败", e);
             return false;

@@ -1,10 +1,8 @@
 package com.infinova.sso.controller;
 
-import com.alibaba.fastjson.JSONArray;
 import com.infinova.sso.entity.ReturnEntity;
 import com.infinova.sso.entity.User;
 import com.infinova.sso.service.JwtService;
-import com.infinova.sso.util.HttpUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -34,14 +32,13 @@ public class JwtController {
         return ReturnEntity.successResult(token);
     }
 
-    @PostMapping("/checkJwt")
+    @GetMapping("/checkJwt")
     public ReturnEntity checkJwt(String token) {
         return ReturnEntity.successResult(service.checkJwt(token));
     }
 
     @GetMapping("/inValid")
-    public ReturnEntity inValid() {
-        String token = HttpUtil.getData(JwtService.JWT_KEY);
+    public ReturnEntity inValid(String token) {
         service.inValid(token);
         return ReturnEntity.successResult(null);
     }

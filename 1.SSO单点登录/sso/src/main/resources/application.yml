@@ -9,22 +9,22 @@ spring:
     type: redis
   redis:
     database: 0
-    host: 192.168.1.100
+    host: 10.82.27.177
     port: 6379
     password:
     # 连接超时时间（ms)
-    timeout: 1000ms
+    timeout: 5000
     # 高版本springboot中使用jedis或者lettuce
     jedis:
       pool:
         # 连接池最大连接数（负值表示无限制）
         max-active: 8
         # 连接池最大阻塞等待时间（负值无限制)
-        max-wait: 5000ms
+        max-wait: 5000
         # 最大空闲链接数
         max-idle: 8
         # 最小空闲链接数
-        min-idle: 0
+        min-idle: 1
   mvc:
     static-path-pattern: /static/**
 # jwt过期时间，单位分钟
