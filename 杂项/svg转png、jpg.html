@@ -1,0 +1,65 @@
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>图片转换</title>
+</head>
+
+<body>
+    <div style="width:80%;margin:0 auto;text-align:center">
+        <canvas style="position: fixed; left:-100000px" id="canvas"></canvas>
+        <input onchange="deal()" type="file" id="file" accept=".svg" multiple><br /><br />
+        <!-- <input type="" -->
+        <span>请输入图片后缀:</span><input id="filePostfix" type='text' value="bmp"><br /><br />
+        <button onclick="startDeal()">开始处理</button>
+    </div>
+    <script>
+        let arr = [];
+
+        function deal() {
+            let files = document.getElementById('file').files;
+            for (let i = 0; i < files.length; i++) {
+                let reader = new FileReader();
+                reader.readAsText(files[i]);
+                reader.onload = function (e) {
+                    arr.push({
+                        name: files[i].name,
+                        content: this.result
+                    })
+                }
+            }
+        }
+
+        function startDeal() {
+            let postfix = document.getElementById('filePostfix').value;
+            for (let i = 0; i < arr.length; i++) {
+                let item = arr[i];
+                console.log(`开始处理：${item.name}`);
+                let xml = new DOMParser().parseFromString(item.content, 'text/xml');
+                let svgContent = xml.getElementsByTagName('svg')[0].outerHTML;
+                let img = new Image();
+                img.src = 'data:image/svg+xml;base64,' + window.btoa(unescape(encodeURIComponent(svgContent)));
+                img.onload = function () {
+                    let canvas = document.getElementById('canvas');
+                    canvas.width = img.width;
+                    canvas.height = img.height;
+                    let ctx = canvas.getContext('2d')
+                    ctx.drawImage(img, 0, 0, img.width, img.height, 0, 0, img.width, img.height);
+                    let a = document.createElement('a')
+                    a.href = canvas.toDataURL('image/' + postfix);
+                    a.download = item.name.substr(0, item.name.lastIndexOf('.')) + '.' + postfix;
+                    a.click();
+                    if (i == arr.length - 1) {
+                        console.log('处理完毕');
+                        document.getElementById('file').value = '';
+                        ctx.clearRect(0, 0, img.width, img.height);
+                        arr = [];
+                    }
+                }
+            }
+        }
+    </script>
+
+</body>
+
+</html>
