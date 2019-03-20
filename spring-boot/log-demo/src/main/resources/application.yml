@@ -1,0 +1,11 @@
+#logging:
+##  file: out.log
+#  path: ./log/
+#  file:
+#    max-size: 10MB
+#  level:
+#    root: info
+#    com.example.log_demo.log1: warn
+spring:
+  profiles:
+    active: dev
