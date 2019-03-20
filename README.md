@@ -19,6 +19,8 @@
 - **7. springcloud: spring cloud学习过程中的demo项目**,[点击跳转](https://github.com/FleyX/demo-project/tree/master/springcloud)<br/>注意其中licensingservice为配置中心git集中配置的样例配置。configFolder为配置中心磁盘文件集中式配置的样例。
 
 - **8. 杂项**,[点击跳转](https://github.com/FleyX/demo-project/tree/master/%E6%9D%82%E9%A1%B9)
+  - svg转png、jpg：svg文件转成png，jpg等图片格式
   - excel导出 ： java 导出excel，支持百万级别数据导出
+  
 
 
