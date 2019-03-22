@@ -1,0 +1,47 @@
+sharding:
+  jdbc:
+    datasource:
+      names: ds0,ds1,ds2
+      ds0:
+        type: com.alibaba.druid.pool.DruidDataSource
+        driver-class-name: com.mysql.jdbc.Driver
+        url: jdbc:mysql://10.82.27.177:3306/ds0
+        username: root
+        password: 123456
+      ds1:
+        type: com.alibaba.druid.pool.DruidDataSource
+        driver-class-name: com.mysql.jdbc.Driver
+        url: jdbc:mysql://10.82.27.177:3306/ds1
+        username: root
+        password: 123456
+      ds2:
+        type: com.alibaba.druid.pool.DruidDataSource
+        driver-class-name: com.mysql.jdbc.Driver
+        url: jdbc:mysql://10.82.27.177:3306/ds2
+        username: root
+        password: 123456
+    config:
+      sharding:
+        # 默认数据源，可以将不分库分表的数据表放在这里
+        default-data-source-name: ds2
+        default-database-strategy:
+          inline:
+            sharding-column: uId
+            algorithm-expression: ds$->{uId % 2}
+        tables:
+          order:
+            key-generator-column-name: orderId
+            actual-data-nodes: ds$->{0..1}.order$->{0..1}
+            table-strategy:
+              inline:
+                sharding-column: orderId
+                algorithm-expression: order$->{orderId%2}
+          order_item:
+            key-generator-column-name: orderItemId
+            actual-data-nodes: ds$->{0..1}.order_item$->{0..1}
+            table-strategy:
+              inline:
+                sharding-column: orderId
+                algorithm-expression: orderItemId$->{orderId%2}
+      props:
+        sql.show: true
