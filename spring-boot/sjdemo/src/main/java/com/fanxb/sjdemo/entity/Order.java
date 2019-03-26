@@ -8,7 +8,7 @@ import java.util.Date;
 public class Order {
 
   private long orderId;
-  private long uId;
+  private long userId;
   private Date createTime;
   private long totalPrice;
 

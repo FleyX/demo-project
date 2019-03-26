@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.fanxb.sjdemo.dao.OrderItemDao">
+
+    <insert id="addOne" parameterType="orderItem" useGeneratedKeys="true" keyProperty="orderItemId">
+        insert into order_item(orderId,name,price) values(#{orderId},#{name},#{price})
+    </insert>
+
+    <select id="getByOrderId" resultType="orderItem">
+        select * from order_item where orderId=#{id}
+    </select>
+
+</mapper>

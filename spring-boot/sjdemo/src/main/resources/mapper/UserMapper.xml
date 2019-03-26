@@ -2,11 +2,19 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.fanxb.sjdemo.dao.UserDao">
 
-    <insert id="addOne"  useGeneratedKeys="true" keyProperty="uId">
-        insert into user(name,age) values(#{name},#{age})
+    <insert id="addOne" useGeneratedKeys="true" keyProperty="userId">
+        insert into user(name,age
+        <if test="userId>0">
+            ,userId
+        </if>
+        ) values(#{name},#{age}
+        <if test="userId>0">
+            ,#{userId}
+        </if>
+        )
     </insert>
-    
-    <select id="getOneById" resultType="User">
+
+    <select id="getOneById" resultType="user">
         select * from user where uId=#{id}
     </select>
 

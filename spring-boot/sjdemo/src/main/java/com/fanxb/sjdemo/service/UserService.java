@@ -2,10 +2,16 @@ package com.fanxb.sjdemo.service;
 
 import com.fanxb.sjdemo.dao.UserDao;
 import com.fanxb.sjdemo.entity.User;
+import io.shardingsphere.transaction.annotation.ShardingTransactionType;
+import io.shardingsphere.transaction.api.TransactionType;
+import lombok.extern.slf4j.Slf4j;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
+import java.util.logging.ConsoleHandler;
 
 /**
  * 类功能简述：
@@ -15,21 +21,34 @@ import org.springframework.stereotype.Service;
  * @date 2019/3/22 15:36
  */
 @Service
+@Slf4j
 public class UserService {
     Logger logger = LoggerFactory.getLogger(UserService.class);
 
     @Autowired
     private UserDao dao;
 
-    public void addOne(String name, int age) {
-        User user = new User();
-        user.setName(name);
-        user.setAge(age);
-        long id= dao.addOne(user);
-        logger.info("插入id:{}", user.getuId());
+    public long addOne(User user) {
+        this.dao.addOne(user);
+        return user.getUserId();
     }
 
-    public User getOne(int id){
+    public User getOne(long id) {
         return dao.getOneById(id);
+    }
+
+    /**
+     * 测试跨库事务
+     */
+    @ShardingTransactionType(TransactionType.XA)
+    @Transactional
+    public void testTransactional() {
+        User user1 = new User(123, "988", 12);
+        logger.info("user1已经插入");
+        logger.info("user1已经插入");
+        this.dao.addOne(user1);
+        User user2 = new User(124, "988", 12);
+        this.dao.addOne(user2);
+        this.dao.addOne(user2);
     }
 }

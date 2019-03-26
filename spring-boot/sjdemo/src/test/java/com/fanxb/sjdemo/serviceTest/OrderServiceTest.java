@@ -27,7 +27,7 @@ public class OrderServiceTest {
     @Test
     public void addOrderTest() {
         Order order = new Order();
-        order.setUId(12);
+        order.setUserId(12);
         order.setCreateTime(new Date());
         order.setTotalPrice(12);
         orderService.insertOne(order);

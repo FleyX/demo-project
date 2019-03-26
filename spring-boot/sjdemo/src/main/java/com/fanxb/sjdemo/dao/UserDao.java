@@ -1,9 +1,6 @@
 package com.fanxb.sjdemo.dao;
 
 import com.fanxb.sjdemo.entity.User;
-import org.apache.ibatis.annotations.Param;
-
-import java.util.List;
 
 /**
  * 类功能简述：
@@ -13,7 +10,22 @@ import java.util.List;
  * @date 2019/3/22 15:29
  */
 public interface UserDao  {
-    long addOne(User user);
+    /**
+     * Description:
+     *
+     * @author fanxb
+     * @date 2019/3/25 14:22
+     * @param user user
+     */
+    void addOne(User user);
 
-    User getOneById(int id);
+    /**
+     * Description:
+     *
+     * @author fanxb
+     * @date 2019/3/25 14:22
+     * @param id id
+     * @return com.fanxb.sjdemo.entity.User
+     */
+    User getOneById(long id);
 }

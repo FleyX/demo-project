@@ -16,13 +16,12 @@ import org.springframework.stereotype.Service;
  */
 @Service
 public class OrderService {
-    private Logger logger = LoggerFactory.getLogger(OrderService.class);
 
     @Autowired
     private OrderDao orderDao;
 
-    public void insertOne(Order order) {
-        long id = orderDao.addOne(order);
-        logger.info("订单插入id：{}", order.getOrderId());
+    public long insertOne(Order order) {
+        this.orderDao.addOne(order);
+        return order.getOrderId();
     }
 }

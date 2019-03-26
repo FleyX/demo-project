@@ -29,10 +29,11 @@
             <version>2.0.0</version>
         </dependency>
 
+        <!--这里有个大坑，版本过高使用xa事务会报错未指定数据库，参见:https://github.com/apache/incubator-shardingsphere/issues/1842-->
         <dependency>
             <groupId>mysql</groupId>
             <artifactId>mysql-connector-java</artifactId>
-            <scope>runtime</scope>
+            <version>5.1.24</version>
         </dependency>
         <dependency>
             <groupId>io.shardingsphere</groupId>
@@ -48,6 +49,26 @@
         <dependency>
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
+        </dependency>
+
+        <!-- https://mvnrepository.com/artifact/com.alibaba/fastjson -->
+        <dependency>
+            <groupId>com.alibaba</groupId>
+            <artifactId>fastjson</artifactId>
+            <version>1.2.56</version>
+        </dependency>
+
+        <!--xa分布式事务-->
+        <dependency>
+            <groupId>io.shardingsphere</groupId>
+            <artifactId>sharding-transaction-2pc-xa</artifactId>
+            <version>3.1.0</version>
+        </dependency>
+
+        <dependency>
+            <groupId>io.shardingsphere</groupId>
+            <artifactId>sharding-transaction-spring-boot-starter</artifactId>
+            <version>3.1.0</version>
         </dependency>
 
         <dependency>

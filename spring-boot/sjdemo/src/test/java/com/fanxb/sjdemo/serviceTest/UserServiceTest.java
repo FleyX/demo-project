@@ -27,7 +27,6 @@ public class UserServiceTest {
 
     @Test
     public void addUserTest(){
-        userService.addOne("xiaoming",12);
     }
 
     @Test

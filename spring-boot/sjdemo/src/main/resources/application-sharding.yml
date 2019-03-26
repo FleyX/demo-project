@@ -1,7 +1,7 @@
 sharding:
   jdbc:
     datasource:
-      names: ds0,ds1,ds2
+      names: ds0,ds1
       ds0:
         type: com.alibaba.druid.pool.DruidDataSource
         driver-class-name: com.mysql.jdbc.Driver
@@ -14,21 +14,31 @@ sharding:
         url: jdbc:mysql://10.82.27.177:3306/ds1
         username: root
         password: 123456
-      ds2:
-        type: com.alibaba.druid.pool.DruidDataSource
-        driver-class-name: com.mysql.jdbc.Driver
-        url: jdbc:mysql://10.82.27.177:3306/ds2
-        username: root
-        password: 123456
+#      ds2:
+#        type: com.alibaba.druid.pool.DruidDataSource
+#        driver-class-name: com.mysql.jdbc.Driver
+#        url: jdbc:mysql://10.82.27.177:3306/ds2
+#        username: root
+#        password: 123456
     config:
       sharding:
-        # 默认数据源，可以将不分库分表的数据表放在这里
-        default-data-source-name: ds2
+        # 默认数据源，可以将不分库分表的数据表放在这里(此处的表需与已经分库分表的表完全没有关联，不会产生联表查询操作，因为跨库连表查询是没办法实现的),3.1.0版本dql查询存在bug，不使用默认库
+#        default-data-source-name: ds2
+        # 默认分库策略
         default-database-strategy:
           inline:
-            sharding-column: uId
-            algorithm-expression: ds$->{uId % 2}
+            sharding-column: userId
+            algorithm-expression: ds$->{userId % 2}
+        # 配置表策略
         tables:
+          # 公共表(比如字典表,角色表，权限表等),不分库或者分表,数据将发送到所有库中,方便联表查询
+          dictionary:
+            key-generator-column-name: dictionaryId
+            actual-data-nodes: ds$->{0..1}.dictionary
+          # user 前面已经根据uId分库，因此user表不进行分表
+          user:
+            key-generator-column-name: userId
+            actual-data-nodes: ds$->{0..1}.user
           order:
             key-generator-column-name: orderId
             actual-data-nodes: ds$->{0..1}.order$->{0..1}
@@ -42,6 +52,6 @@ sharding:
             table-strategy:
               inline:
                 sharding-column: orderId
-                algorithm-expression: orderItemId$->{orderId%2}
+                algorithm-expression: order_item$->{orderId%2}
       props:
         sql.show: true

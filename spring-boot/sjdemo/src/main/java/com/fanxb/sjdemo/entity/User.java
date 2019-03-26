@@ -1,33 +1,21 @@
 package com.fanxb.sjdemo.entity;
 
 
+import lombok.Data;
+
+@Data
 public class User {
 
-  private long uId;
-  private String name;
-  private long age;
+    private long userId;
+    private String name;
+    private int age;
 
-    public long getuId() {
-        return uId;
+    public User() {
     }
 
-    public void setuId(long uId) {
-        this.uId = uId;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
+    public User(long userId, String name, int age) {
+        this.userId = userId;
         this.name = name;
-    }
-
-    public long getAge() {
-        return age;
-    }
-
-    public void setAge(long age) {
         this.age = age;
     }
 }
