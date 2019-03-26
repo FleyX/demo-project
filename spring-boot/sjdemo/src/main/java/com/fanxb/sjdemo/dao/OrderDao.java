@@ -42,6 +42,6 @@ public interface OrderDao {
      * @author fanxb
      * @date 2019/3/25 14:24
      */
-    List<Order> getOrderByUserId(int id);
+    List<Order> getOrderByUserId(long id);
 
 }

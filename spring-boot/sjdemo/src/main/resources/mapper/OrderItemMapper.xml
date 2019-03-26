@@ -3,11 +3,15 @@
 <mapper namespace="com.fanxb.sjdemo.dao.OrderItemDao">
 
     <insert id="addOne" parameterType="orderItem" useGeneratedKeys="true" keyProperty="orderItemId">
-        insert into order_item(orderId,name,price) values(#{orderId},#{name},#{price})
+        insert into order_item(userId,orderId,name,price) values(#{userId},#{orderId},#{name},#{price})
     </insert>
 
     <select id="getByOrderId" resultType="orderItem">
         select * from order_item where orderId=#{id}
+    </select>
+
+    <select id="getOrderItemByPrice" resultType="orderItem">
+        select a.* from order_item a inner join order b on a.orderId = b.orderId where b.totalPrice=#{price}
     </select>
 
 </mapper>

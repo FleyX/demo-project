@@ -31,4 +31,15 @@ public interface OrderItemDao {
      */
     List<OrderItem> getByOrderId(int id);
 
+    /**
+     * Description: 根据订单金额连表查询
+     *
+     * @author fanxb
+     * @date 2019/3/26 16:55
+     * @param price
+     * @return java.util.List<com.fanxb.sjdemo.entity.OrderItem>
+     */
+    List<OrderItem> getOrderItemByPrice(int price);
+
+
 }

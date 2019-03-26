@@ -11,7 +11,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.logging.ConsoleHandler;
 
 /**
  * 类功能简述：
@@ -41,7 +40,7 @@ public class UserService {
      * 测试跨库事务
      */
     @ShardingTransactionType(TransactionType.XA)
-    @Transactional
+    @Transactional(rollbackFor = Exception.class)
     public void testTransactional() {
         User user1 = new User(123, "988", 12);
         logger.info("user1已经插入");

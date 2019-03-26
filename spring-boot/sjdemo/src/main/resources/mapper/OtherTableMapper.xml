@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.fanxb.sjdemo.dao.OtherTableDao">
+
+    <insert id="addOne" useGeneratedKeys="true" keyProperty="id" parameterType="otherTable">
+        insert into other_table(name) values(#{name})
+    </insert>
+
+    <select id="getAll" resultType="otherTable">
+        select * from other_table
+    </select>
+
+
+</mapper>
