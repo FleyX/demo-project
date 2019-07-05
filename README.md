@@ -24,4 +24,4 @@
   
 - **9. springboot logback配置**,[点击跳转](https://github.com/FleyX/demo-project/tree/master/spring-boot/log-demo)<br/>运行test文件看效果
 
-- **10.springboot 分库分表demo**，基于sparding-jdbc实现。[点击跳转](https://github.com/FleyX/demo-project/tree/master/spring-boot/sjdemo)。博文跳转：[https://www.tapme.top/blog/detail/2019-03-20-10-38](https://www.tapme.top/blog/detail/2019-03-20-10-38)
+- **10.springboot 分库分表demo**，基于sharding-jdbc实现。[点击跳转](https://github.com/FleyX/demo-project/tree/master/spring-boot/sjdemo)。博文跳转：[https://www.tapme.top/blog/detail/2019-03-20-10-38](https://www.tapme.top/blog/detail/2019-03-20-10-38)
