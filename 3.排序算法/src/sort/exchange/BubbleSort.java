@@ -15,6 +15,7 @@ public class BubbleSort {
         int[] arr = {4, 12, 2, 8, 453, 1, 59, 33};
         for (int i = 0, length = arr.length; i < arr.length - 1; i++) {
             for (int j = 0, tempLength = length - 1 - i; j < tempLength; j++) {
+                //如果当前数大于下一个数那么和下一个数交换位置
                 if (arr[j] > arr[j + 1]) {
                     int temp = arr[j];
                     arr[j] = arr[j + 1];

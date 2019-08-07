@@ -18,14 +18,14 @@ public class InsertSort {
 
     public static void sort(Integer[] arr) {
         for (int i = 0, length = arr.length; i < length; i++) {
-            //有序部分从后向前比较
+            //有序部分从后向前比较,直到找到合适的位置
             int j = i, temp = arr[i];
             //如果arr[j-1]<=temp,说明arr[j]需为temp，否则将arr[j-1]向后移动一位
             for (; j > 0 && temp < arr[j - 1]; j--) {
                 arr[j] = arr[j - 1];
             }
             arr[j] = temp;
-            System.out.println("当前数组状态为："+Arrays.toString(arr));
+            System.out.println("当前数组状态为：" + Arrays.toString(arr));
         }
     }
 

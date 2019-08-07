@@ -34,7 +34,7 @@ public class ShellSort {
                 }
             }
             n1 /= 2;
-        } while (n1 > 0);
+        } while (n1 >= 1);
     }
 
     public static void main(String[] args) {

@@ -30,7 +30,7 @@ public class SimpleSelectSort {
 
     public static void main(String[] args) {
         Integer[] arr = {1, 65, 32, 12, 21};
-        ShellSort.sort(arr);
+        sort(arr);
         System.out.println(Arrays.toString(arr));
     }
 }

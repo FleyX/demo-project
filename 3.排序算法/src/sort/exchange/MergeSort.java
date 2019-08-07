@@ -1,6 +1,7 @@
 package sort.exchange;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 
 /**
  * 类功能简述：归并排序
@@ -13,13 +14,25 @@ import java.util.ArrayList;
  */
 public class MergeSort {
 
+    /**
+     * Description:
+     *
+     * @param arr   待排序数组
+     * @param start 开始下标
+     * @param end   结束下标
+     * @author fanxb
+     * @date 2019/8/6 9:29
+     */
     public static void mergeSort(Integer[] arr, int start, int end) {
         if (start >= end) {
             return;
         }
         int half = (start + end) / 2;
+        //归并左边
         mergeSort(arr, start, half);
+        //归并右边
         mergeSort(arr, half + 1, end);
+        //合并
         merge(arr, start, half, end);
     }
 
@@ -50,19 +63,23 @@ public class MergeSort {
                 j++;
             }
         } else {
-            //说明第二个数组卖完了，将第二个数组剩余部分放到tempList中
-            while (j <= half) {
+            //说明第二个数组已经完了，将第一个数组剩余部分放到tempList中
+            while (i <= half) {
                 //说明第二个数组处理完了
-                tempList.add(arr[j]);
-                j++;
+                tempList.add(arr[i]);
+                i++;
             }
         }
-
+        //最后将tempList复制到arr中
+        for (int k = 0, length = tempList.size(); k < length; k++) {
+            arr[start + k] = tempList.get(k);
+        }
 
     }
 
     public static void main(String[] args) {
-        Integer[] arr = {4, 3, 1, 2, 5, 4, 2, 54};
-        mergeSort(arr, 0, arr.length);
+        Integer[] arr = {4, 3, 1, 2, 5, 4, 2};
+        mergeSort(arr, 0, arr.length - 1);
+        System.out.println(Arrays.toString(arr));
     }
 }
