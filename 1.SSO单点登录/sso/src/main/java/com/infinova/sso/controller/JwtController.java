@@ -37,6 +37,11 @@ public class JwtController {
         return ReturnEntity.successResult(service.checkJwt(token));
     }
 
+    @GetMapping("/refreshJwt")
+    public ReturnEntity refreshJwt(String token){
+        return ReturnEntity.successResult(service.refreshJwt(token));
+    }
+
     @GetMapping("/inValid")
     public ReturnEntity inValid(String token) {
         service.inValid(token);

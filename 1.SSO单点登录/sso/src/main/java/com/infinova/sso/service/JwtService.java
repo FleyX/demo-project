@@ -1,5 +1,6 @@
 package com.infinova.sso.service;
 
+import com.auth0.jwt.interfaces.Claim;
 import com.infinova.sso.entity.User;
 import com.infinova.sso.exception.CustomException;
 import com.infinova.sso.util.JwtUtil;
@@ -20,7 +21,6 @@ import java.util.*;
  * @date 2019/3/4 18:17
  */
 @Service
-@EnableScheduling
 public class JwtService {
 
     public static final String JWT_KEY = "jwt_token";
@@ -57,6 +57,21 @@ public class JwtService {
         } catch (Exception e) {
             logger.info("账号密码错误:{},{}", user.getName(), user.getPassword());
             throw new CustomException(e, "账号密码错误");
+        }
+    }
+
+    /**
+     * 过期时间小于半小时，返回新的jwt，否则返回原jwt
+     * @param jwt
+     * @return
+     */
+    public String refreshJwt(String jwt){
+        String secret = RedisUtil.redisTemplate.opsForValue().get(jwt);
+        Map<String, Claim> map = JwtUtil.decode(jwt,secret);
+        if(map.get("exp").asLong()*1000 - System.currentTimeMillis()/1000<30*60*1000){
+            return this.generateNewJwt(map.get("name").asString());
+        }else{
+            return jwt;
         }
     }
 
