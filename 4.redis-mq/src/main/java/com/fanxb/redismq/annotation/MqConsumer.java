@@ -13,6 +13,7 @@ import java.lang.annotation.Target;
  * Created By Fxb
  * Date: 2020/3/26
  * Time: 15:26
+ * @author fanxb
  */
 @Target(ElementType.TYPE)
 @Retention(RetentionPolicy.RUNTIME)
@@ -23,5 +24,4 @@ public @interface MqConsumer {
      * 队列主题
      */
     String topic() default "default_es_topic";
-
 }
