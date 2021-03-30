@@ -1,4 +1,4 @@
-package com.fanxb.interview;
+package com.fanxb.common;
 
 /**
  * TODO 类描述
@@ -41,7 +41,7 @@ public class Q83 {
      * 递归版块
      *
      * @param head head
-     * @return com.fanxb.interview.Q83.ListNode
+     * @return com.fanxb.common.Q83.ListNode
      * @author fanxb
      * @date 2021/3/26
      **/

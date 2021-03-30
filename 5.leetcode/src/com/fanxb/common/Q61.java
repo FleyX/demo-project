@@ -1,4 +1,4 @@
-package com.fanxb.interview;
+package com.fanxb.common;
 
 /**
  * 旋转链表

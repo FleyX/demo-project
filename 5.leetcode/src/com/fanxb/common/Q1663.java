@@ -1,4 +1,4 @@
-package com.fanxb.interview;
+package com.fanxb.common;
 
 /**
  * 具有给定数值的最小字符串
@@ -57,7 +57,8 @@ public class Q1663 {
     }
 
     public static void main(String[] args) {
-        System.out.println(new Q1663().translateNum(23100, 567226));
-        System.out.println(new Q1663().translateNum1(23100, 567226));
+        System.out.println(new Q1663().translateNum(1, 26));
+        System.out.println(new Q1663().translateNum1(1, 26));
+        System.out.println(4<<1);
     }
 }

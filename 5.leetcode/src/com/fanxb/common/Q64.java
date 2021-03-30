@@ -1,4 +1,4 @@
-package com.fanxb.interview;
+package com.fanxb.common;
 
 /**
  * Created with IntelliJ IDEA
