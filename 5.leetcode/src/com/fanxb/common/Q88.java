@@ -33,9 +33,7 @@ public class Q88 {
 
 
     public static void main(String[] args) {
-        int[] nums1 = {1, 2, 3, 0, 0, 0};
-        int[] nums2 = {2, 5, 6};
-        solution(nums1, 3, nums2, 3);
+        int[] nums1 = new int[12];
         System.out.println(Arrays.toString(nums1));
     }
 }
