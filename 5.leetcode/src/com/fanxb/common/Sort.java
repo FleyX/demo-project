@@ -1,6 +1,7 @@
 package com.fanxb.common;
 
 import java.util.Arrays;
+import java.util.concurrent.ThreadPoolExecutor;
 
 /**
  * 排序
@@ -72,6 +73,9 @@ public class Sort {
         }
     }
 
+    private static final ThreadLocal<String> threadLocal1 = new ThreadLocal<>();
+    private static final ThreadLocal<String> threadLocal2 = new ThreadLocal<>();
+
 
     public static void main(String[] args) {
         int[] s = {23, 49, 13, 12, 45, 393, 21, 21048, 12};
@@ -79,5 +83,7 @@ public class Sort {
 //        quickSort(s, 0, s.length - 1);
         insertSort(s);
         System.out.println(Arrays.toString(s));
+        threadLocal1.set("thread1");
+        threadLocal2.set("thread2");
     }
 }
