@@ -23,7 +23,5 @@ public class Q46 {
 
     public static void main(String[] args) {
         System.out.println(new Q46().translateNum(12258));
-        new Thread().getState();
-
     }
 }
