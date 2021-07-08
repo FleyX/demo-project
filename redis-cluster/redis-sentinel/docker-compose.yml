@@ -1,0 +1,68 @@
+version: "3"
+services:
+
+  redis-main:
+    image: redis:6.2.4
+    container_name: redis-main
+    volumes:
+      - ./config:/usr/local/etc/redis
+      - ./data/main:/data
+    user: "${UID}:${GID}"
+    command: ["redis-server","/usr/local/etc/redis/master.conf"]
+    networks:
+      - redis
+
+  redis-slave1:
+    container_name: redis-slave1
+    image: redis:6.2.4
+    volumes:
+      - ./config:/usr/local/etc/redis
+      - ./data/slave1:/data
+    command: ["redis-server", "/usr/local/etc/redis/slave1.conf"]
+    user: "${UID}:${GID}"
+    networks:
+      - redis
+
+  redis-slave2:
+    image: redis:6.2.4
+    container_name: redis-slave2
+    user: "${UID}:${GID}"
+    command: ["redis-server", "/usr/local/etc/redis/slave2.conf"]
+    volumes:
+      - ./config:/usr/local/etc/redis
+      - ./data/slave2:/data
+    networks:
+      - redis
+    
+  redis-sentinel1:
+    image: redis:6.2.4
+    container_name: redis-sentinel1
+    user: "${UID}:${GID}"
+    command: ["redis-server", "/usr/local/etc/redis/sentinel1.conf",'--sentinel']
+    volumes:
+      - ./config:/usr/local/etc/redis
+    networks:
+      - redis
+    
+  redis-sentinel2:
+    image: redis:6.2.4
+    container_name: redis-sentinel2
+    user: "${UID}:${GID}"
+    command: ["redis-server", "/usr/local/etc/redis/sentinel2.conf",'--sentinel']
+    volumes:
+      - ./config:/usr/local/etc/redis
+    networks:
+      - redis
+    
+  redis-sentinel3:
+    image: redis:6.2.4
+    container_name: redis-sentinel3
+    user: "${UID}:${GID}"
+    command: ["redis-server", "/usr/local/etc/redis/sentinel3.conf",'--sentinel']
+    volumes:
+      - ./config:/usr/local/etc/redis
+    networks:
+      - redis
+
+networks:
+  redis:

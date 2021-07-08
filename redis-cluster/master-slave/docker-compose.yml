@@ -1,0 +1,36 @@
+version: "3"
+services:
+
+  redis-main:
+    image: redis:6.2.4
+    container_name: redis-main
+    volumes:
+      - ./config/master.conf:/usr/local/etc/redis/redis.conf
+    command: ["redis-server","/usr/local/etc/redis/redis.conf"]
+    ports:
+      - 16379:6379
+    networks:
+      - redis1
+  redis-cluster1:
+    container_name: redis-cluster1
+    image: redis:6.2.4
+    volumes:
+      - ./config/slave.conf:/usr/local/etc/redis/redis.conf
+    command: ["redis-server", "/usr/local/etc/redis/redis.conf"]
+    ports:
+      - 16380:6379
+    networks:
+      - redis1
+  redis-cluster2:
+    image: redis:6.2.4
+    container_name: redis-cluster2
+    command: ["redis-server", "/usr/local/etc/redis/redis.conf"]
+    volumes:
+      - ./config/slave.conf:/usr/local/etc/redis/redis.conf
+        #    command: ["redis-server", "/usr/local/etc/redis/redis.conf"]
+    ports:
+      - 16381:6379
+    networks:
+      - redis1
+networks:
+  redis1:
