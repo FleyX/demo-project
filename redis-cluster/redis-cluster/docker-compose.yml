@@ -1,0 +1,45 @@
+version: "3"
+services:
+
+  node1:
+    image: redis:6.2.4
+    volumes:
+      - ./config:/usr/local/etc/redis
+    command: ["redis-server","/usr/local/etc/redis/node1.conf"]
+    network_mode: "host"
+
+  node2:
+    image: redis:6.2.4
+    volumes:
+      - ./config:/usr/local/etc/redis
+    command: ["redis-server","/usr/local/etc/redis/node2.conf"]
+    network_mode: "host"
+
+  node3:
+    image: redis:6.2.4
+    volumes:
+      - ./config:/usr/local/etc/redis
+    command: ["redis-server","/usr/local/etc/redis/node3.conf"]
+    network_mode: "host"
+
+  node4:
+    image: redis:6.2.4
+    volumes:
+      - ./config:/usr/local/etc/redis
+    command: ["redis-server","/usr/local/etc/redis/node4.conf"]
+    network_mode: "host"
+
+  node5:
+    image: redis:6.2.4
+    volumes:
+      - ./config:/usr/local/etc/redis
+    command: ["redis-server","/usr/local/etc/redis/node5.conf"]
+    network_mode: "host"
+
+  node6:
+    image: redis:6.2.4
+    volumes:
+      - ./config:/usr/local/etc/redis
+    command: ["redis-server","/usr/local/etc/redis/node6.conf"]
+    network_mode: "host"
+

@@ -1,0 +1,6 @@
+data/main/*
+!data/main/.gitkeep
+data/slave1/*
+!data/slave1/.gitkeep
+data/slave2/*
+!data/slave2/.gitkeep
