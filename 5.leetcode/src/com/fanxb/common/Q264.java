@@ -1,5 +1,7 @@
 package com.fanxb.common;
 
+import java.util.*;
+
 /**
  * Created with IntelliJ IDEA
  *
@@ -24,15 +26,32 @@ public class Q264 {
             if (uglyArr[count - 1] < values[min]) {
                 //数字不重复才记录
                 uglyArr[count] = values[min];
-                count++;
+                ;
             }
             uglyIndex[min]++;
-            values[min] = min == 0 ? 2 * uglyArr[uglyIndex[min]] : min == 1 ? 3 * uglyArr[uglyIndex[min]] : 5 * uglyArr[uglyIndex[min]] ;
+            values[min] = min == 0 ? 2 * uglyArr[uglyIndex[min]] : min == 1 ? 3 * uglyArr[uglyIndex[min]] : 5 * uglyArr[uglyIndex[min]];
         }
         return uglyArr[count - 1];
     }
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws Exception {
         System.out.println(new Q264().nthUglyNumber(16));
+
+//        List<String> st<();
+        Map<String, String> map = new HashMap<>();
+        Set<String> set = new HashSet<>();
+        Runnable runnable = () -> {
+            try {
+                System.out.println("我在运行,开始等待");
+//                Object.wait();
+                System.out.println("睡觉完了");
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        };
+        Thread thread = new Thread(runnable);
+        thread.start();
+        Thread.sleep(2000);
+        Thread.currentThread().notify();
     }
 }
