@@ -8,6 +8,7 @@ import com.fanxb.exceptiontest.entity.exception.CustomBusinessException;
 import com.fanxb.exceptiontest.entity.vo.TestBody;
 import com.fanxb.exceptiontest.entity.vo.TestBody2;
 import com.fanxb.exceptiontest.entity.vo.TestBody3;
+import com.fanxb.exceptiontest.entity.vo.TestBody4;
 import org.hibernate.validator.constraints.Range;
 import org.springframework.validation.BindException;
 import org.springframework.validation.annotation.Validated;
@@ -62,6 +63,14 @@ public class TestController {
      */
     @PostMapping("/test5")
     public Result test5(@Validated({Insert.class}) @RequestBody TestBody3 testBody) {
+        return null;
+    }
+
+    /**
+     * 自定义校验
+     */
+    @PostMapping("/test6")
+    public Result test6(@Validated @RequestBody TestBody4 testBody) {
         return null;
     }
 
