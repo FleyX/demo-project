@@ -2,10 +2,9 @@
 
 这里的代码都有对应的博文的，可以在[www.tapme.top](http://www.tapme.top) 上查看。
 
-这里给我另外两个项目打个广告：
+这里给我另外的项目打个广告：
 
-- [PSN折扣小助手](https://github.com/FleyX/psnDiscountAssistant) PS4游戏价格、折扣查询，低价推送。奖杯查看。
-- [签签世界](https://github.com/FleyX/bookmark) 在线云书签应用。树结构管理书签，支持拖拽。支持全文检索书签。支持百度/google直接搜索。
+- [签签世界](https://github.com/FleyX/bookmark) 在线云书签应用
 
 
 # demo-project
