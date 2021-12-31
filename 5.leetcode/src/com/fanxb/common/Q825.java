@@ -1,36 +1,33 @@
 package com.fanxb.common;
 
+import java.text.SimpleDateFormat;
 import java.util.Arrays;
+import java.util.Date;
 
 public class Q825 {
     public int numFriendRequests(int[] ages) {
-        int res = 0;
-        Arrays.sort(ages);
-        //二分查找100的分界点
-        int index100 = search(ages, 100, 0, ages.length - 1);
-        for (int i = search(ages, 15, 0, index100); i <= index100; i++) {
-            int startIndex = search(ages, Double.valueOf(Math.ceil(0.5 * ages[i] + 7)).intValue(), 0, i);
-            res += i - startIndex;
+        //年龄计数
+        int[] ageCount = new int[121];
+        for (int age : ages) {
+            ageCount[age]++;
         }
-        for (int i = index100; i < ages.length; i++) {
-            int startIndex = search(ages, Double.valueOf(Math.ceil(0.5 * ages[i] + 7)).intValue(), index100, i);
-            res += i - startIndex;
+        //计算前缀和
+        int[] preCount = new int[ageCount.length];
+        for (int i = 1; i < ageCount.length; i++) {
+            preCount[i] = preCount[i - 1] + ageCount[i];
+        }
+        int res = 0;
+        //从15岁开始遍历
+        for (int i = 15; i < ageCount.length; i++) {
+            if (ageCount[i] == 0) {
+                continue;
+            }
+            int startAge = i / 2 + 7;
+            res += ageCount[i] * (preCount[i] - preCount[startAge] - 1);
         }
         return res;
     }
 
-    public int search(int[] ages, int target, int initL, int initR) {
-        int l = initL, r = initR, mid = (l + r) / 2;
-        while (l < r) {
-            if (ages[mid] < target) {
-                l = mid + 1;
-            } else {
-                r = mid;
-            }
-            mid = (l + r) / 2;
-        }
-        return l;
-    }
 
     public static void main(String[] args) {
         System.out.println(new Q825().numFriendRequests(new int[]{16, 16}));
