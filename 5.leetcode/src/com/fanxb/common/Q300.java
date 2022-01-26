@@ -26,7 +26,23 @@ public class Q300 {
         return res;
     }
 
+    public int another(int[] nums) {
+        int n = nums.length, res = 1;
+        int[] dp = new int[n];
+        for (int i = n - 1; i >= 0; i--) {
+            dp[i] = 1;
+            for (int j = i + 1; j < n; j++) {
+                if (nums[i] < nums[j]) {
+                    dp[i] = Math.max(dp[i], dp[j] + 1);
+                }
+            }
+            res = Math.max(res, dp[i]);
+        }
+        return res;
+    }
+
     public static void main(String[] args) {
         System.out.println(new Q300().lengthOfLIS(new int[]{0, 1, 0, 3, 2, 3}));
+        System.out.println(new Q300().another(new int[]{0, 1, 0, 3, 2, 3}));
     }
 }
