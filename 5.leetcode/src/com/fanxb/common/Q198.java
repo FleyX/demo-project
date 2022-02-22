@@ -1,27 +1,7 @@
 package com.fanxb.common;
 
-import java.util.Arrays;
-
-/**
- * 旋转链表
- * 题目地址：https://leetcode-cn.com/problems/assign-cookies/submissions/
- * 解题思路：
- * 贪心算法，想不明白
- *
- * @author fanxb
- * Date: 2020/6/9 15:10
- */
-public class Q213 {
-
+public class Q198 {
     public int rob(int[] nums) {
-        if (nums.length == 1) {
-            return nums[0];
-        } else {
-            return Math.max(robDo(Arrays.copyOfRange(nums, 0, nums.length - 1)), robDo(Arrays.copyOfRange(nums, 1, nums.length)));
-        }
-    }
-
-    private int robDo(int[] nums) {
         //定义fn[k]表示有k个房子时的最大金额
         int[] fn = new int[nums.length + 1];
         //显然fn[0]=0,fn[1]=nums[0]
@@ -37,8 +17,4 @@ public class Q213 {
         return res;
     }
 
-    public static void main(String[] args) {
-        int[] s = {1, 2, 3, 1};
-        System.out.println(new Q213().rob(s));
-    }
 }
