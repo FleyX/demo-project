@@ -1,17 +1,12 @@
 package com.fanxb.common;
 
-import java.util.HashMap;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Map;
-
 /**
- * 找到每次从低点到高点的变化即可
+ * 题目地址： https://leetcode-cn.com/problems/partition-labels/
  *
  * @author fanxb
  * Date: 2020/6/9 15:10
  */
-public class Q122 {
+public class Q123 {
 
     public static int solution(int[] prices) {
         int res = 0;
