@@ -1,6 +1,6 @@
 欢迎Issues提问，我会每天看的。
 
-这里的代码都有对应的博文的，可以在[www.tapme.top](http://www.tapme.top) 上查看。
+这里的代码都有对应的博文的，可以在[blog.fleyx.com](http://blog.fleyx.com) 上查看。
 
 这里给我另外的项目打个广告：
 
