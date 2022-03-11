@@ -1,6 +1,7 @@
 package com.fanxb.common;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Stack;
 
@@ -10,10 +11,11 @@ import java.util.Stack;
  * @author fanxb
  * Date: 2020/6/9 15:10
  */
-public class Q46 {
+public class Q47 {
 
-    public List<List<Integer>> permute(int[] nums) {
+    public List<List<Integer>> permuteUnique(int[] nums) {
         List<List<Integer>> res = new ArrayList<>();
+        Arrays.sort(nums);
         dfs(nums, new Stack<>(), new boolean[nums.length], res);
         return res;
     }
@@ -32,18 +34,25 @@ public class Q46 {
         if (temp.size() == nums.length) {
             res.add(new ArrayList<>(temp));
         }
-        for (int i = 0; i < nums.length; i++) {
+        for (int i = 0; i < nums.length; ) {
             if (!used[i]) {
                 temp.push(nums[i]);
                 used[i] = true;
                 dfs(nums, temp, used, res);
                 used[i] = false;
                 temp.pop();
+                int tempI = i;
+                while (i < nums.length && nums[tempI] == nums[i]) {
+                    i++;
+                }
+            } else {
+                i++;
             }
+
         }
     }
 
     public static void main(String[] args) {
-        System.out.println(new Q46().permute(new int[]{1, 1, 2}));
+        System.out.println(new Q47().permuteUnique(new int[]{1, 1, 2}));
     }
 }
