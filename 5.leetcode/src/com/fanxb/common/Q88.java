@@ -35,14 +35,19 @@ public class Q88 {
         int[] nums1Copy = new int[m];
         System.arraycopy(nums1, 0, nums1Copy, 0, m);
         for (int i = 0, j = 0, k = 0; k < m + n; k++) {
-            
+            if (j>=n || (i < m && nums1Copy[i] < nums2[j])) {
+                nums1[k] = nums1Copy[i++];
+            } else {
+                nums1[k] = nums2[j++];
+            }
         }
-
     }
 
 
     public static void main(String[] args) {
-        int[] nums1 = new int[12];
+        int[] nums1 = new int[]{1,2,3};
+        int[] nums2 = new int[]{};
+        new Q88().merge(nums1,3,nums2,0);
         System.out.println(Arrays.toString(nums1));
     }
 }

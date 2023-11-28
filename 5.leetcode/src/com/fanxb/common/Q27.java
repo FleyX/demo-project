@@ -24,7 +24,20 @@ public class Q27 {
         return count;
     }
 
+    public int removeElement1(int[] nums, int val) {
+        int i = 0, j = 0;
+        while (j < nums.length) {
+            if (nums[j] != val) {
+                nums[i++] = nums[j];
+            }
+            j++;
+        }
+        return i;
+    }
+
     public static void main(String[] args) {
-        System.out.println(new Q27().removeElement(new int[]{0, 1, 2, 2, 3, 0, 4, 2}, 2));
+        int[] arr = new int[]{0, 1, 2, 2, 3, 0, 4, 2};
+        System.out.println(new Q27().removeElement1(arr, 2));
+        System.out.println(Arrays.toString(arr));
     }
 }

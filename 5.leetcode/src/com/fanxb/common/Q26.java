@@ -1,5 +1,7 @@
 package com.fanxb.common;
 
+import java.util.Arrays;
+
 /**
  * TODO
  *
@@ -23,7 +25,21 @@ public class Q26 {
         return count;
     }
 
+    public int newRemoveDuplicates(int[] nums) {
+        int i = 0, j = 1;
+        while (j < nums.length) {
+            if (nums[j] != nums[i]) {
+                nums[++i] = nums[j];
+            }
+            j++;
+        }
+        return i + 1;
+    }
+
+
     public static void main(String[] args) {
-        System.out.println(new Q26().removeDuplicates(new int[]{0, 0, 1, 1, 1, 2, 2, 3, 3, 4}));
+        int[] arr = new int[]{0, 0, 1, 1, 1, 2, 2, 3, 3, 4};
+        System.out.println(new Q26().newRemoveDuplicates(arr));
+        System.out.println(Arrays.toString(arr));
     }
 }
