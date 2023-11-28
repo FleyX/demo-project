@@ -31,6 +31,15 @@ public class Q88 {
         System.arraycopy(res, 0, nums1, 0, count);
     }
 
+    public void merge(int[] nums1, int m, int[] nums2, int n) {
+        int[] nums1Copy = new int[m];
+        System.arraycopy(nums1, 0, nums1Copy, 0, m);
+        for (int i = 0, j = 0, k = 0; k < m + n; k++) {
+            
+        }
+
+    }
+
 
     public static void main(String[] args) {
         int[] nums1 = new int[12];
