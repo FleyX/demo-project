@@ -12,8 +12,6 @@ package com.fanxb.common;
  * 4. 否则判断temp1>x,如果满足r=mid,重复2
  * 5. 否则l=mid,重复2
  *
- *
- *
  * @author fanxb
  * Date: 2020/6/11 9:56
  */
@@ -39,7 +37,24 @@ public class Q69 {
         }
     }
 
+    public int mySqrt1(int x) {
+        if (x == 0) return x;
+        if (x <= 3) return 1;
+        int l = 2, r = x / 2, m;
+        while ((m = (int) Math.floor((l + r) / 2.0)) != r) {
+            if (m * (long)m > x) {
+                r = m;
+            } else if (m == l) {
+                r--;
+            } else {
+                l = m;
+            }
+        }
+        return m;
+    }
+
     public static void main(String[] args) {
-        System.out.println(new Q69().mySqrt(2147395599));
+//        System.out.println(new Q69().mySqrt(2147395599));
+        System.out.println(new Q69().mySqrt1(2147395599));
     }
 }
