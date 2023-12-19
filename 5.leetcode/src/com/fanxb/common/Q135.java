@@ -38,9 +38,32 @@ public class Q135 {
         return count;
     }
 
+    public static int candy1(int[] ratings) {
+        //every one set one candy
+        int length = ratings.length;
+        int[] res = new int[length];
+        Arrays.fill(res, 1);
+        for (int i = 1; i < length; i++) {
+            //从左到右遍历，如果下一个人分数更高那么多发一颗糖
+            if (ratings[i] > ratings[i - 1]) {
+                res[i] = res[i - 1] + 1;
+            }
+        }
+        for (int i = length - 2; i >= 0; i--) {
+            if (ratings[i] > ratings[i + 1] && res[i] <= res[i + 1]) {
+                res[i] = res[i + 1] + 1;
+            }
+        }
+        int sum = 0;
+        for (int temp : res) {
+            sum += temp;
+        }
+        return sum;
+    }
+
     public static void main(String[] args) {
-        int[] s = {1, 2, 87, 87, 87, 2, 1};
+        int[] s = {1, 3, 4, 5, 2};
         System.out.println(Arrays.toString(s));
-        System.out.println(candy(s));
+        System.out.println(candy1(s));
     }
 }
