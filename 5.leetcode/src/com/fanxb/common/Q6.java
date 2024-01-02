@@ -1,5 +1,7 @@
 package com.fanxb.common;
 
+import java.util.Arrays;
+
 public class Q6 {
     public String convert(String s, int numRows) {
         if (numRows == 1) {
@@ -39,7 +41,40 @@ public class Q6 {
         return new String(strs);
     }
 
+    public String convert1(String s, int numRows) {
+        int length = s.length();
+        if (length <= 1 || numRows == 1) return s;
+        int nSize = numRows * 2 - 2;
+        int lineNum = (numRows - 1) * (length / nSize + 1);
+        char[][] chars = new char[numRows][lineNum];
+        for (int i = 0; i < numRows; i++) Arrays.fill(chars[i], ' ');
+        int count = 0, m = 0, n = 0;
+        for (int i = 0; i < length; i++) {
+            chars[m][n] = s.charAt(i);
+            count++;
+            if (count == nSize) {
+                count = 0;
+                m--;
+                n++;
+            } else if (count < numRows) {
+                m++;
+            } else {
+                m--;
+                n++;
+            }
+        }
+        StringBuilder builder = new StringBuilder();
+        for (int i = 0; i < numRows; i++) {
+            for (int j = 0; j < lineNum; j++) {
+                if (chars[i][j] != ' ') {
+                    builder.append(chars[i][j]);
+                }
+            }
+        }
+        return builder.toString();
+    }
+
     public static void main(String[] args) {
-        System.out.println(new Q6().convert("PAYPALISHIRING", 4));
+        System.out.println(new Q6().convert1("PAYPALISHIRING", 4));
     }
 }
