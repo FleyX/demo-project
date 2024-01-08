@@ -18,7 +18,7 @@ public class Q45 {
             maxIndex = Math.max(maxIndex, i+nums[i]);
             //走到一步的边界了，已经找到下一跳的起点
             if(i==end){
-                steps++;
+                step++;
                 end = maxIndex;
             }
         }
