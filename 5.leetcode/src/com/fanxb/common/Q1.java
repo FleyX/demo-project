@@ -25,6 +25,16 @@ public class Q1 {
         return null;
     }
 
+    public int[] twoSum1(int[] nums, int target) {
+        Map<Integer, Integer> map = new HashMap<>();
+        for (int i = 0; i < nums.length; i++) map.put(nums[i], i);
+        for (int i = 0; i < nums.length; i++) {
+            Integer targetI = map.get(target - nums[i]);
+            if (targetI != null && targetI != i) return new int[]{i, map.get(target - nums[i])};
+        }
+        return null;
+    }
+
     /**
      * 更优，一次循环即可
      *

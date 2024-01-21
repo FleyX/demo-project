@@ -35,7 +35,7 @@ public class Q14 {
                 if (res.charAt(j) == strs[i].charAt(j)) temp.append(res.charAt(j));
                 else break;
             }
-            if (temp.isEmpty()) return "";
+            if (temp.length() == 0) return "";
             res = temp.toString();
         }
         return res;
