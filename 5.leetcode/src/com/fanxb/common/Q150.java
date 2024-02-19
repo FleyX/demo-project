@@ -1,6 +1,8 @@
 package com.fanxb.common;
 
 
+import java.util.Stack;
+
 public class Q150 {
     public void gameOfLife(int[][] board) {
         int m = board.length, n = board[0].length;
@@ -30,6 +32,31 @@ public class Q150 {
                 else if (board[i][j] == 2) board[i][j] = 0;
             }
         }
+    }
+
+
+    public int evalRPN(String[] tokens) {
+        Stack<Integer> stack = new Stack<>();
+        for (String str : tokens) {
+            switch (str) {
+                case "+":
+                    stack.push(stack.pop() + stack.pop());
+                    break;
+                case "-":
+                    stack.push(-stack.pop() + stack.pop());
+                    break;
+                case "*":
+                    stack.push(stack.pop() * stack.pop());
+                    break;
+                case "/":
+                    int num1 = stack.pop(), num2 = stack.pop();
+                    stack.push(num2 / num1);
+                    break;
+                default:
+                    stack.push(Integer.valueOf(str));
+            }
+        }
+        return stack.pop();
     }
 
     public static void main(String[] args) {
