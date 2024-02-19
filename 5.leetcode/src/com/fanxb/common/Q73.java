@@ -24,6 +24,5 @@ public class Q73 {
     }
 
     public static void main(String[] args) {
-        System.out.println(new Q73().minDistance("horse", "ros"));
     }
 }

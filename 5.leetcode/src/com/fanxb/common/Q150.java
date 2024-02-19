@@ -33,6 +33,5 @@ public class Q150 {
     }
 
     public static void main(String[] args) {
-        System.out.println(new Q150().maxPoints(new int[][]{{1, 1}, {3, 2}, {5, 3}, {4, 1}, {2, 3}, {1, 4}}));
     }
 }
