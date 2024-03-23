@@ -21,4 +21,15 @@ public class Q121 {
         return max;
     }
 
+    public int maxProfile1(int[] prices) {
+        if (prices.length == 1) {
+            return 0;
+        }
+        int res = 0, minP = prices[0];
+        for (int price : prices) {
+            minP = Math.min(minP, price);
+            res = Math.max(res, price - minP);
+        }
+        return res;
+    }
 }
