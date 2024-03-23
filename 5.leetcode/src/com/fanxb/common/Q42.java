@@ -67,9 +67,31 @@ public class Q42 {
         return res;
     }
 
+    public int trap2(int[] height) {
+        int length = height.length;
+        //i左边的最大高度
+        int[] left = new int[length];
+        left[0] = 0;
+        //i右边的最大高度
+        int[] right = new int[length];
+        right[length - 1] = 0;
+        for (int i = 1; i < length; i++) {
+            left[i] = Math.max(left[i - 1], height[i - 1]);
+            right[length - i - 1] = Math.max(right[length - i], height[length - i]);
+        }
+        int res = 0;
+        for (int i = 1; i < length - 1; i++) {
+            int temp = Math.min(left[i], right[i]) - height[i];
+            if (temp > 0) {
+                res += temp;
+            }
+        }
+        return res;
+    }
 
     public static void main(String[] args) {
         System.out.println(new Q42().trap(new int[]{0, 1, 0, 2, 1, 0, 1, 3, 2, 1, 2, 1}));
         System.out.println(new Q42().trap1(new int[]{0, 1, 0, 2, 1, 0, 1, 3, 2, 1, 2, 1}));
+        System.out.println(new Q42().trap2(new int[]{0, 1, 0, 2, 1, 0, 1, 3, 2, 1, 2, 1}));
     }
 }

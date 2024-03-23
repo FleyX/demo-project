@@ -43,4 +43,21 @@ public class Q138 {
         }
         return res.next;
     }
+
+    public Node newCopy(Node head) {
+        Map<Node, Node> map = new HashMap<>();
+        Node cur = head;
+        while (cur != null) {
+            map.put(cur, new Node(cur.val));
+            cur = cur.next;
+        }
+        cur = head;
+        while (cur != null) {
+            Node n = map.get(cur);
+            n.random = map.get(cur.random);
+            n.next = map.get(cur.next);
+            cur = cur.next;
+        }
+        return map.get(head);
+    }
 }

@@ -62,17 +62,39 @@ public class Q2 {
         return res;
     }
 
+    public ListNode addTwoNumbers1(ListNode l1, ListNode l2) {
+        ListNode res = new ListNode(0);
+        ListNode temp = null;
+        //是否进位
+        boolean jw = false;
+        while (l1 != null || l2 != null) {
+            if (temp == null) temp = res;
+            else {
+                temp.next = new ListNode(0);
+                temp = temp.next;
+            }
+            if (l1 != null) {
+                temp.val += l1.val;
+                l1 = l1.next;
+            }
+            if (l2 != null) {
+                temp.val += l2.val;
+                l2 = l2.next;
+            }
+            if (jw) {
+                temp.val += 1;
+                jw = false;
+            }
+            if (temp.val >= 10) {
+                jw = true;
+                temp.val -= 10;
+            }
+        }
+        if (jw) temp.next = new ListNode(1);
+        return res;
+    }
+
+
     public static void main(String[] args) {
-        ListNode l1 = new ListNode(2);
-        l1.next = new ListNode(4);
-        l1.next.next = new ListNode(9);
-
-        ListNode l2 = new ListNode(5);
-        l2.next = new ListNode(6);
-        l2.next.next = new ListNode(4);
-        l2.next.next.next = new ListNode(9);
-
-        new Q2().addTwoNumbers(l1, l2);
-//        new Q2().addTwoNumbers(new ListNode(0), new ListNode(0));
     }
 }

@@ -39,7 +39,32 @@ public class Q3 {
         return Math.max(characters.size(), res);
     }
 
+    public int lengthOfLongestSubstring1(String s) {
+        int l = 0, r = 0, length = s.length();
+        int[] map = new int[129];
+        int res = 0;
+        while (r < length) {
+            char c = s.charAt(r);
+            boolean has = map[c] == 1;
+            if (has) {
+                res = Math.max(res, r - l);
+                //遇到重复的，把l右移直到排除掉重复的
+                while (true) {
+                    char c1 = s.charAt(l);
+                    map[c1] = 0;
+                    l++;
+                    if (c1 == c) break;
+                }
+            } else if (r == length - 1) {
+                res = Math.max(res, r - l + 1);
+            }
+            map[c] = 1;
+            r++;
+        }
+        return res;
+    }
+
     public static void main(String[] args) {
-        System.out.println(new Q3().lengthOfLongestSubstring("bbbbbbbbbbbbbbbbb"));
+        System.out.println(new Q3().lengthOfLongestSubstring1("abcabcbb"));
     }
 }

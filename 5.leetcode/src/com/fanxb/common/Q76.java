@@ -51,6 +51,36 @@ public class Q76 {
         return start < 0 ? "" : s.substring(start, end + 1);
     }
 
+    public String minWindow(String s, String t) {
+        int sSize = s.length(), needCount = t.length();
+        int[] map = new int[128];
+        for (int i = 0; i < needCount; i++) map[t.charAt(i)]++;
+        int l = 0, r = 0, minL = 0, minR = sSize;
+        while (r < sSize) {
+            char temp = s.charAt(r);
+            if (map[temp] > 0) needCount--;
+            map[temp]--;
+            if (needCount == 0) {
+                //说明包含了所有元素,开始把l向右移动直到刚好包含所有元素
+                while (needCount == 0) {
+                    temp = s.charAt(l);
+                    if (map[temp] == 0) {
+                        //说明l这个位置刚好，
+                        if ((r - l) < (minR - minL)) {
+                            minL = l;
+                            minR = r;
+                        }
+                        needCount++;
+                    }
+                    map[temp]++;
+                    l++;
+                }
+            }
+            r++;
+        }
+        return minR == sSize ? "" : s.substring(minL, minR + 1);
+    }
+
 
     public static void main(String[] args) {
         System.out.println(solution("a", "aa"));
