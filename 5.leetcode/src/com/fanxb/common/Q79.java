@@ -6,7 +6,6 @@ public class Q79 {
     public boolean exist(char[][] board, String word) {
         char[] chars = word.toCharArray();
         int m = board.length, n = board[0].length;
-        cache = new boolean[m][n];
         for (int i = 0; i < m; i++) {
             for (int j = 0; j < n; j++) {
                 if (dfs(board, chars, 0, i, j, m, n)) return true;
