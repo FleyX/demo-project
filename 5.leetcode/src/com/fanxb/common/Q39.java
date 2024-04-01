@@ -33,6 +33,35 @@ public class Q39 {
         }
     }
 
+    private class NewSolution {
+        private List<List<Integer>> res;
+        private List<Integer> temp;
+        private int sum;
+
+        public List<List<Integer>> combinationSum(int[] candidates, int target) {
+            res = new ArrayList<>();
+            temp = new ArrayList<>();
+            sum = 0;
+            dfs(candidates, target, 0);
+            return res;
+        }
+
+        private void dfs(int[] candidates, int target, int cur) {
+            if (sum > target) return;
+            if (sum == target) {
+                res.add(new ArrayList<>(temp));
+                return;
+            }
+            for (int i = cur; i < candidates.length; i++) {
+                temp.add(candidates[i]);
+                sum += candidates[i];
+                dfs(candidates, target, i);
+                sum -= candidates[i];
+                temp.remove(temp.size() - 1);
+            }
+        }
+    }
+
     public static void main(String[] args) {
         new Q39().combinationSum(new int[]{2, 3, 5}, 8).forEach(System.out::println);
     }

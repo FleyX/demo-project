@@ -1,6 +1,7 @@
 package com.fanxb.common;
 
 import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Stack;
 
@@ -42,6 +43,37 @@ public class Q46 {
             }
         }
     }
+
+    private static class NewSolution {
+        private List<List<Integer>> res;
+        private List<Integer> temp;
+        private boolean[] cache;
+
+        public List<List<Integer>> permute(int[] nums) {
+            res = new LinkedList<>();
+            temp = new ArrayList<>(nums.length);
+            cache = new boolean[nums.length];
+            dfs(nums, nums.length);
+            return res;
+        }
+
+        private void dfs(int[] nums, int length) {
+            if (temp.size() == nums.length) {
+                res.add(new ArrayList<>(temp));
+                return;
+            }
+            for (int i = 0; i < length; i++) {
+                if (!cache[i]) {
+                    temp.add(nums[i]);
+                    cache[i] = true;
+                    dfs(nums, length);
+                    cache[i] = false;
+                    temp.remove(temp.size() - 1);
+                }
+            }
+        }
+    }
+
 
     public static void main(String[] args) {
         System.out.println(new Q46().permute(new int[]{1, 1, 2}));
