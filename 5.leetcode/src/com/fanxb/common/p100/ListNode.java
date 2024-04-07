@@ -1,8 +1,8 @@
-package com.fanxb.common;
+package com.fanxb.common.p100;
 
 public class ListNode {
-    public int val;
-    public ListNode next;
+    int val;
+    ListNode next;
 
     public ListNode() {
     }
