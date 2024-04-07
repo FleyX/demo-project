@@ -9,21 +9,23 @@ package com.fanxb.common.p100;
 public class Q9 {
 
     public boolean isPalindrome(int x) {
-        //小于0的数或者末尾为0的正数肯定不是回文数
-        if (x < 0 || (x > 0 && x % 10 == 0)) {
-            return false;
-        }
-        long temp = 1;
-        while (x / (temp * 10) > 0) {
-            temp = temp * 10;
-        }
-        for (int i = 1; i < temp; temp = temp / 10, i *= 10) {
-            System.out.println(x / i % 10 + ":" + x / temp % 10);
-            if (x / i % 10 != x / temp % 10) {
-                return false;
-            }
+        if (x < 0) return false;
+        String s = String.valueOf(x);
+        int i = 0, j = s.length() - 1;
+        while (i < j) {
+            if (s.charAt(i++) != s.charAt(j--)) return false;
         }
         return true;
+    }
+
+    public boolean isPalindrome1(int x) {
+        if (x < 0) return false;
+        int temp = x, rev = 0;
+        while (temp > 0) {
+            rev = rev * 10 + temp % 10;
+            temp = temp / 10;
+        }
+        return x == rev;
     }
 
     public static void main(String[] args) {

@@ -42,7 +42,7 @@ public class Q69 {
         if (x <= 3) return 1;
         int l = 2, r = x / 2, m;
         while ((m = (int) Math.floor((l + r) / 2.0)) != r) {
-            if (m * (long)m > x) {
+            if (m * (long) m > x) {
                 r = m;
             } else if (m == l) {
                 r--;
@@ -51,6 +51,32 @@ public class Q69 {
             }
         }
         return m;
+    }
+
+    public int mySqrt2(int x) {
+        if (x == 0) return 0;
+        long l = 0, r = x;
+        while (l < r) {
+            long mid = (l + r) / 2;
+            long val = mid * mid;
+            if (val == x) return (int) mid;
+            else if (val > x) r = mid;
+            else if (mid == l) return (int) l;
+            else l = mid;
+        }
+        return (int) l;
+    }
+
+    public int mySqrt3(int x) {
+        if (x == 0) return 0;
+        double temp = x;
+        while (true) {
+            double temp1 = (temp + x / temp) / 2;
+            if (Math.abs(temp1 - temp) <= 0.00001) {
+                return (int) temp1;
+            }
+            temp =temp1;
+        }
     }
 
     public static void main(String[] args) {
