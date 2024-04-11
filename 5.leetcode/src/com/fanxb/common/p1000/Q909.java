@@ -1,4 +1,4 @@
-package com.fanxb.common;
+package com.fanxb.common.p1000;
 
 import java.util.LinkedList;
 import java.util.Queue;

@@ -1,4 +1,4 @@
-package com.fanxb.common;
+package com.fanxb.common.p2000;
 
 /**
  * 具有给定数值的最小字符串

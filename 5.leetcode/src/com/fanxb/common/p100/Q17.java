@@ -1,4 +1,4 @@
-package com.fanxb.common;
+package com.fanxb.common.p100;
 
 import java.util.ArrayList;
 import java.util.HashSet;

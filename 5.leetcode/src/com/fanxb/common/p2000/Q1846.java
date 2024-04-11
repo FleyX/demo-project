@@ -1,4 +1,4 @@
-package com.fanxb.common;
+package com.fanxb.common.p2000;
 
 import java.util.Arrays;
 

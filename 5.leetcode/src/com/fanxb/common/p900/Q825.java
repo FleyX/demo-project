@@ -1,8 +1,4 @@
-package com.fanxb.common;
-
-import java.text.SimpleDateFormat;
-import java.util.Arrays;
-import java.util.Date;
+package com.fanxb.common.p900;
 
 public class Q825 {
     public int numFriendRequests(int[] ages) {

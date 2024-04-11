@@ -1,4 +1,4 @@
-package com.fanxb.common;
+package com.fanxb.common.p2000;
 
 public class Q1688 {
     private static int[] res = new int[201];

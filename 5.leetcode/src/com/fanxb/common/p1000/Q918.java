@@ -1,4 +1,4 @@
-package com.fanxb.common;
+package com.fanxb.common.p1000;
 
 public class Q918 {
     public int maxSubarraySumCircular(int[] nums) {

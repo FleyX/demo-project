@@ -1,4 +1,4 @@
-package com.fanxb.common;
+package com.fanxb.common.p900;
 
 /**
  * 两数相加

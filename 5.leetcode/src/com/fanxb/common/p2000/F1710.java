@@ -1,7 +1,4 @@
-package com.fanxb.common;
-
-import java.util.HashMap;
-import java.util.Map;
+package com.fanxb.common.p2000;
 
 /**
  * 两数相加

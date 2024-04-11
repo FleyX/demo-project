@@ -1,8 +1,6 @@
-package com.fanxb.common;
+package com.fanxb.common.p1000;
 
-import java.util.Arrays;
 import java.util.HashMap;
-import java.util.LinkedList;
 import java.util.Map;
 
 /**

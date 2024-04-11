@@ -1,6 +1,4 @@
-package com.fanxb.common;
-
-import java.util.Arrays;
+package com.fanxb.common.p800;
 
 /**
  * Created with IntelliJ IDEA

@@ -1,5 +1,7 @@
 package com.fanxb.common.p400;
 
+import java.util.Arrays;
+
 /**
  * 定义dp[i]为以nums[i]结尾的子序列最大长度
  *
@@ -38,6 +40,35 @@ public class Q300 {
         }
         return res;
     }
+
+    public int better(int[] nums) {
+        int[] tails = new int[nums.length];
+        int res = 0;
+        for (int num : nums) {
+            int l = 0, r = res;
+            while (l < r) {
+                int m = (l + r) / 2;
+                if (tails[m] < num) l = m + 1;
+                else r = m;
+            }
+            if (l == res) res++;
+        }
+        return res;
+    }
+
+    public int bad(int[] nums) {
+        int[] dp = new int[nums.length];
+        Arrays.fill(dp,1);
+        int res = 0;
+        for (int i = 1; i < nums.length; i++) {
+            for (int j = 0; j < i; j++) {
+                if (nums[j] < nums[i]) dp[i] = Math.max(dp[j] + 1, dp[i]);
+            }
+            res = Math.max(res, dp[i]);
+        }
+        return res;
+    }
+
 
     public static void main(String[] args) {
         System.out.println(new Q300().lengthOfLIS(new int[]{0, 1, 0, 3, 2, 3}));
