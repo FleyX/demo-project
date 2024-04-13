@@ -61,4 +61,6 @@ public class Test {
 //        test.shell(arr, arr.length / 2);
         System.out.println(Arrays.toString(arr));
     }
+
+    Object object =new Object();
 }
