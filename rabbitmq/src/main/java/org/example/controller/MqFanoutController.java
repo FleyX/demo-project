@@ -1,8 +1,11 @@
 package org.example.controller;
 
+import cn.hutool.core.util.IdUtil;
 import cn.hutool.core.util.RandomUtil;
-import org.example.config.DirectRabbitConfig;
 import org.example.config.TopicRabbitConfig;
+import org.example.entity.mq.MqMessage;
+import org.example.listener.Listener;
+import org.springframework.amqp.core.MessagePostProcessor;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -10,19 +13,13 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping("/direct")
-public class MqDirectController {
+@RequestMapping("/fanout")
+public class MqFanoutController {
     @Autowired
     private RabbitTemplate rabbitTemplate;
 
-    @GetMapping("/one")
-    public void sendOne(){
-        this.rabbitTemplate.convertAndSend(DirectRabbitConfig.DIRECT_EXCHANGE,"direct.one", RandomUtil.randomString(10));
+    @GetMapping("/add")
+    public void add() {
+        this.rabbitTemplate.convertAndSend("fanoutExchange","", RandomUtil.randomString(10));
     }
-
-    @GetMapping("/two")
-    public void sendTwo(){
-        this.rabbitTemplate.convertAndSend(DirectRabbitConfig.DIRECT_EXCHANGE,"direct.two",System.currentTimeMillis());
-    }
-
 }

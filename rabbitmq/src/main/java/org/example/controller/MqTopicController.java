@@ -4,9 +4,7 @@ import cn.hutool.core.util.IdUtil;
 import cn.hutool.core.util.RandomUtil;
 import org.example.config.TopicRabbitConfig;
 import org.example.entity.mq.MqMessage;
-import org.example.listener.AutoCreateListener;
-import org.springframework.amqp.AmqpException;
-import org.springframework.amqp.core.Message;
+import org.example.listener.Listener;
 import org.springframework.amqp.core.MessagePostProcessor;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -37,11 +35,12 @@ public class MqTopicController {
 
     @GetMapping("/autoCreateQueue")
     public void autoCreateQueue() {
+        //设置唯一id,用于防重复消费
         MessagePostProcessor postProcessor = message -> {
             message.getMessageProperties().setHeader("unique-id", IdUtil.fastSimpleUUID());
             return message;
         };
-        this.rabbitTemplate.convertAndSend(AutoCreateListener.EXCHANGE, AutoCreateListener.KEY,
+        this.rabbitTemplate.convertAndSend(Listener.EXCHANGE, Listener.KEY,
                 new MqMessage(RandomUtil.randomString(3), RandomUtil.randomString(5)), postProcessor);
     }
 }
