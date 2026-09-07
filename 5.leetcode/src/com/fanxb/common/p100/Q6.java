@@ -74,7 +74,32 @@ public class Q6 {
         return builder.toString();
     }
 
+    public String convert2(String s, int numRows) {
+        //numRows*2-2
+        int cycleNum = numRows*2-2;
+        int x=numRows,y=(int)Math.ceil( s.length()*1.0/cycleNum)*numRows-1;
+        char[][] arr = new char[x][y];
+        for(int i=0;i<s.length();){
+            int tempY=i/cycleNum*(numRows-1);
+            for(int j=0;j<numRows;i++,j++){
+                arr[j][tempY] = s.charAt(i);
+            }
+            for(int j=0;j<numRows-2;i++,j++){
+                arr[numRows-1-1-j][tempY+1+j] = s.charAt(i);
+            }
+        }
+        StringBuilder sb = new StringBuilder();
+        for(int i=0;i<x;i++){
+            for(int j=0;j<y;j++){
+                if(arr[i][j]!=0){
+                    sb.append(arr[i][j]);
+                }
+            }
+        }
+        return sb.toString();
+    }
+
     public static void main(String[] args) {
-        System.out.println(new Q6().convert1("PAYPALISHIRING", 4));
+        System.out.println(new Q6().convert2("PAYPALISHIRING", 3));
     }
 }

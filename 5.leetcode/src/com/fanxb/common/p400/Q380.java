@@ -4,42 +4,49 @@ import java.util.*;
 
 public class Q380 {
     private static class RandomizedSet {
-        private List<Integer> list;
-        private Map<Integer, Integer> map;
-        private Random random;
-
+        private int[] nums = new int[2*(int)Math.pow(10,5)];
+        //记录值-数组index关系
+        private Map<Integer,Integer> map =new HashMap();
         public RandomizedSet() {
-            list = new ArrayList<>();
-            map = new HashMap<>();
-            random = new Random();
+
         }
 
         public boolean insert(int val) {
-            Integer index = map.get(val);
-            if (index != null) return false;
-            list.add(val);
-            map.put(val, list.size() - 1);
-            System.out.println(list.toString());
+            if(map.containsKey(val)){
+                return false;
+            }
+            nums[map.size()]=val;
+            map.put(val,map.size());
             return true;
         }
 
         public boolean remove(int val) {
             Integer index = map.get(val);
-            if (index == null) return false;
-            int last = list.size() - 1;
-            int lastVal = list.get(last);
-            list.set(index, lastVal);
-            list.remove(last);
+            if(index==null){
+                return false;
+            }
             map.remove(val);
-            //避免长度为1时将删除的元素放到map
-            if (!list.isEmpty()) map.put(lastVal, index);
-            System.out.println(list.toString());
+            if(index != map.size()){
+                nums[index] = nums[map.size()];
+                map.put(nums[index],index);
+            }
+
             return true;
         }
 
         public int getRandom() {
-            int size = list.size();
-            return size == 1 ? list.get(0) : list.get(Math.abs(random.nextInt()) % size);
+            int i =(int)Math.ceil(Math.random()*map.size());
+            return nums[i];
         }
+    }
+    static void main() {
+        RandomizedSet set = new RandomizedSet();
+        set.insert(-1);
+        set.remove(-2);
+        set.insert(-2);
+        System.out.println(set.getRandom());
+        set.remove(-1);
+        set.insert(-2);
+        System.out.println(set.getRandom());
     }
 }

@@ -1,6 +1,7 @@
 package com.fanxb.common;
 
 import java.util.Arrays;
+import java.util.Random;
 import java.util.concurrent.ThreadPoolExecutor;
 
 /**
@@ -30,31 +31,42 @@ public class Sort {
         return arr;
     }
 
+    private static Random random = new Random();
+
+    /**
+     * 快排
+     * @param arr
+     * @param start
+     * @param end
+     */
     public static void quickSort(int[] arr, int start, int end) {
-        if (end - start <= 1) {
+        if(start>=end){
             return;
         }
-        int l = start, r = end, base = arr[start];
-        while (l < r) {
-            //右边找到一个小于base的然后交换
-            while (arr[r] >= base && l < r) {
-                r--;
+//        int k = random.nextInt(start,end);
+        int k=0;
+        swap(arr,start,k);
+        int val = arr[start],i=start,j=end;
+        while (i<j){
+            while (i<j && arr[j]>=val){
+                j--;
             }
-            //左边找到一个大于base的
-            while (arr[l] <= base && l < r) {
-                l++;
+            while (i<j && arr[i]<=val){
+                i++;
             }
-            int temp = arr[l];
-            arr[l] = arr[r];
-            arr[r] = temp;
+            if(i<j){
+                swap(arr,i,j);
+            }
         }
-        //交换start和i的位置，使base左边的都小于等于base,右边的都大于等于base
-        arr[start] = arr[l];
-        arr[l] = base;
+        swap(arr,start,i);
+        quickSort(arr,start,i-1);
+        quickSort(arr,i+1,end);
+    }
 
-        //对l左边和右边的分别进行快拍
-        quickSort(arr, start, l - 1);
-        quickSort(arr, l + 1, end);
+    private static void swap(int[] arr,int i,int j){
+        int temp = arr[j];
+        arr[j] = arr[i];
+        arr[i]=temp;
     }
 
     /**
@@ -73,17 +85,56 @@ public class Sort {
         }
     }
 
-    private static final ThreadLocal<String> threadLocal1 = new ThreadLocal<>();
-    private static final ThreadLocal<String> threadLocal2 = new ThreadLocal<>();
+
+
+    /**
+     * 归并排序
+     * @param arr
+     */
+    public static void mergeSort(int[] arr){
+        int[] temp = new int[arr.length];
+        mergeSort(arr,0,arr.length-1,temp);
+        System.out.println(Arrays.toString(arr));
+    }
+
+    private static void mergeSort(int[] nums,int l,int r,int[] temp){
+        if(l>=r){
+            return;
+        }
+        int mid = (l+r)/2;
+        mergeSort(nums,l,mid,temp);
+        mergeSort(nums,mid+1,r,temp);
+        merge(nums,l,r,mid,temp);
+    }
+
+    private static void merge(int[] nums,int l,int r,int mid,int[] temp){
+        int count=0,lStart=l,rStart=mid+1;
+        while(lStart<=mid && rStart<=r){
+            if(nums[lStart]<=nums[rStart]){
+                temp[count++]=nums[lStart++];
+            }else{
+                count+=mid-lStart+1;
+                temp[count++]=nums[rStart++];
+            }
+        }
+        while(lStart<=mid){
+            temp[count++]=nums[lStart++];
+        }
+        while(rStart<=r){
+            temp[count++]=nums[rStart++];
+        }
+        for(int i=0;i<count;i++){
+            nums[l+i]=temp[i];
+        }
+    }
 
 
     public static void main(String[] args) {
         int[] s = {23, 49, 13, 12, 45, 393, 21, 21048, 12};
 //        System.out.println(Arrays.toString(sort1(s)));
-//        quickSort(s, 0, s.length - 1);
-        insertSort(s);
+        quickSort(s, 0, s.length - 1);
+//        insertSort(s);
+//        mergeSort(s);
         System.out.println(Arrays.toString(s));
-        threadLocal1.set("thread1");
-        threadLocal2.set("thread2");
     }
 }

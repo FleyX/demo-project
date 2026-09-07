@@ -38,8 +38,72 @@ public class Q13 {
         return res;
     }
 
+    public int romanToInt1(String s) {
+        String[] sArr = s.split("");
+        int res=0;
+        for(int i=0;i<sArr.length;i++){
+            switch(sArr[i]){
+                case "I":
+                    if(i<sArr.length-1){
+                        if(sArr[i+1]=="V"){
+                            res+=4;
+                            i++;
+                            break;
+                        }else if(sArr[i+1]=="X"){
+                            res+=9;
+                            i++;
+                            break;
+                        }
+                    }
+                    res+=1;
+                    break;
+                case "V":
+                    res+=5;
+                    break;
+                case "X":
+                    if(i<sArr.length-1){
+                        if(sArr[i+1]=="L"){
+                            res+=40;
+                            i++;
+                            break;
+                        }else if(sArr[i+1]=="C"){
+                            res+=90;
+                            i++;
+                            break;
+                        }
+                    }
+                    res+=10;
+                    break;
+                case "L":
+                    res+=50;
+                    break;
+                case "C":
+                    if(i<sArr.length-1){
+                        if(sArr[i+1]=="D"){
+                            res+=400;
+                            i++;
+                            break;
+                        }else if(sArr[i+1]=="M"){
+                            res+=900;
+                            i++;
+                            break;
+                        }
+                    }
+                    res+=100;
+                    break;
+                case "D":
+                    res+=500;
+                    break;
+                case "M":
+                    res+=1000;
+                    break;
+            }
+        }
+        return res;
+    }
+
     public static void main(String[] args) {
         Q13 instance = new Q13();
-        System.out.println(instance.romanToInt("MCMXCIVI"));
+        System.out.println(instance.romanToInt1("MCMXCIV"));
     }
 }

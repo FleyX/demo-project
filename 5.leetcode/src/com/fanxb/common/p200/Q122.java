@@ -32,8 +32,27 @@ public class Q122 {
         return res;
     }
 
+    public static int solution1(int[] prices) {
+        int res=0,size=prices.length;
+        for(int i=0;i<size-1;i++){
+            int temp=0;
+            for(int j=i+1;j<size;j++){
+                if(prices[j]>=prices[j-1]){
+                    temp = prices[j]-prices[i];
+                }else{
+                    res+=temp;
+                    i=j-1;
+                    break;
+                }
+            }
+
+        }
+        return res;
+    }
+
+
     public static void main(String[] args) {
         int[] prices = {7, 1, 5, 3, 6, 4};
-        System.out.println(solution(prices));
+        System.out.println(solution1(prices));
     }
 }
